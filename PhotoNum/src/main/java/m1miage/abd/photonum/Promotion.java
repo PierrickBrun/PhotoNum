@@ -2,7 +2,7 @@ package m1miage.abd.photonum;
 
 public class Promotion {
 
-	private int idCmdDelivre ;
-	private int idComdUtilise ;
+	private Commande cmdDelivre ;
+	private Commande comdUtilise ;
 	private int montant ;
 }
