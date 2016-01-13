@@ -5,9 +5,11 @@ public class Article {
 	private Commande commande;
 	private Album album;
 	private int quantite;
+	private float prix;
 	
 	public Article(Commande commande, Album album, int quantite){
 		this.album = album;
+		this.prix =0;
 		this.commande = commande;
 		this.quantite = quantite;
 	}
