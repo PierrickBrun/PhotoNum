@@ -9,7 +9,21 @@ public class Album {
 	private String postface;
 	private int nbPage;
 	
-	public Album(Client c, int id, int nbp){
+	public Album(Client c,String t, int nbp){
+		this.cli = c;
+		this.titre = t;
+		this.nbPage = nbp;
+		this.preface = "";
+		this.postface ="";
+		
+	}
+	
+	public Album(Client c,String t,String prf, String psf, int nbp){
+		this.cli = c;
+		this.titre = t;
+		this.nbPage = nbp;
+		this.preface = prf;
+		this.postface = psf;
 		
 	}
 	
