@@ -1,5 +1,10 @@
 package m1miage.abd.photonum;
 
-public class Livraison {
+import java.sql.Date;
 
+public class Livraison {
+	private Commande cmd;
+	private Date dateLivraison;
+	private int idComd;
+	private String status;
 }
