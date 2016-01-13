@@ -13,6 +13,7 @@ public class Livraison {
 		this.status = "En cours";
 	}
 
+	
 	public Commande getCmd() {
 		return cmd;
 	}
