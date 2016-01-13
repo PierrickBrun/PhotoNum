@@ -7,7 +7,7 @@ public class Commande {
 
 	private int idCommande;
 	private Date dateCommande;
-	private int prixTotal;
+	private float prixTotal;
 	private String statut;
 	private ArrayList<Article> articlesCmd;
 	
@@ -34,7 +34,7 @@ public class Commande {
 		this.dateCommande = dateCommande;
 	}
 
-	public int getPrixTotal() {
+	public float getPrixTotal() {
 		return prixTotal;
 	}
 
