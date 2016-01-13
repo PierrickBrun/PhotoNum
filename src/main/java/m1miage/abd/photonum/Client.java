@@ -8,12 +8,12 @@ public class Client {
 	private String mail;
 	private String adresse;
 	private String mdp;
-	
-	public Client(String n, String p, String m, String a,String mdp){
-		this.nom = n;
-		this.prenom = p;
-		this.mail = m;
-		this.adresse = a;
+
+	public Client(String nom, String prenom, String mail, String adresse, String mdp) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.mail = mail;
+		this.adresse = adresse;
 		this.mdp = mdp;
 	}
 
@@ -65,6 +65,4 @@ public class Client {
 		this.mdp = mdp;
 	}
 
-
 }
-

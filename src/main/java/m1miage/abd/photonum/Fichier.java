@@ -1,6 +1,6 @@
 package m1miage.abd.photonum;
 
-public class FichierImage {
+public class Fichier {
 
 	private int idFichier;
 	private String chemin;
@@ -8,11 +8,11 @@ public class FichierImage {
 	private String priseDeVue;
 	private String resolution;
 
-	public FichierImage(String ch,String pdv, String res){
-		this.chemin = ch;
+	public Fichier(String chemin, String priseDeVue, String resolution) {
+		this.chemin = chemin;
 		this.partage = false;
-		this.priseDeVue = pdv;
-		this.resolution = res;
+		this.priseDeVue = priseDeVue;
+		this.resolution = resolution;
 	}
 
 	public int getIdFichier() {
@@ -54,6 +54,5 @@ public class FichierImage {
 	public void setResolution(String resolution) {
 		this.resolution = resolution;
 	}
-	
-	
+
 }

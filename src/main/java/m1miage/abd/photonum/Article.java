@@ -2,21 +2,21 @@ package m1miage.abd.photonum;
 
 public class Article {
 
-	private Commande cmd;
+	private Commande commande;
 	private Album album;
 	private int quantite;
 	
-	public Article(Commande c, Album a, int q){
-		this.album = a;
-		this.cmd = c;
-		this.quantite = q;
+	public Article(Commande commande, Album album, int quantite){
+		this.album = album;
+		this.commande = commande;
+		this.quantite = quantite;
 	}
 	
 	public Commande getCmd() {
-		return cmd;
+		return commande;
 	}
-	public void setCmd(Commande cmd) {
-		this.cmd = cmd;
+	public void setCmd(Commande commande) {
+		this.commande = commande;
 	}
 	public Album getAlbum() {
 		return album;

@@ -3,17 +3,17 @@ package m1miage.abd.photonum;
 public class Photo {
 
 	private Album album;
-	private FichierImage fichier;
+	private Fichier fichier;
 	private String titre;
 	private String commentaire;
 	private int page;
 
-	public Photo(Album album, FichierImage fichier) {
+	public Photo(Album album, Fichier fichier) {
 		this.album = album;
 		this.fichier = fichier;
 	}
 
-	public Photo(Album album, FichierImage fichier, String titre, String commentaire, int page) {
+	public Photo(Album album, Fichier fichier, String titre, String commentaire, int page) {
 		this.album = album;
 		this.fichier = fichier;
 		this.titre = titre;
@@ -49,7 +49,7 @@ public class Photo {
 		return album;
 	}
 
-	public FichierImage getFichier() {
+	public Fichier getFichier() {
 		return fichier;
 	}
 

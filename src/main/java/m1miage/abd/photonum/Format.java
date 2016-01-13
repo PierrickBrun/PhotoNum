@@ -1,20 +1,21 @@
 package m1miage.abd.photonum;
 
-public class FormatTirage {
-	
+public class Format {
+
 	private int idFormat;
 	private String libelle;
 	private float prixUnitaire;
 	private String resolutionMinimale;
 	private float vitesseImpression;
 	private int stockPapier;
-	
-	public FormatTirage(String lib, String resMin,float vi, int sp ){
-		this.libelle = lib;
-		this.resolutionMinimale =resMin;
-		this.vitesseImpression = vi;
-		this.stockPapier = sp;
-		this.prixUnitaire =0;
+
+
+	public Format(String libelle, String resolutionMinimale, float vitesseImpression, int stockPapier, String type) {
+		this.libelle = libelle;
+		this.resolutionMinimale = resolutionMinimale;
+		this.vitesseImpression = vitesseImpression;
+		this.stockPapier = stockPapier;
+		this.prixUnitaire = 0;
 	}
 
 	public int getIdFormat() {

@@ -9,13 +9,13 @@ public class Commande {
 	private Date dateCommande;
 	private float prixTotal;
 	private String statut;
-	private ArrayList<Article> articlesCmd;
-	
-	public Commande(){
+	private ArrayList<Article> articles;
+
+	public Commande() {
 		this.dateCommande = new Date();
-		this.prixTotal=0;
-		this.statut ="En cours";
-		this.articlesCmd = new ArrayList<Article>();
+		this.prixTotal = 0;
+		this.statut = "En cours";
+		this.articles = new ArrayList<Article>();
 	}
 
 	public int getIdCommande() {
@@ -51,12 +51,11 @@ public class Commande {
 	}
 
 	public ArrayList<Article> getArticlesCmd() {
-		return articlesCmd;
+		return articles;
 	}
 
 	public void setArticlesCmd(ArrayList<Article> articlesCmd) {
-		this.articlesCmd = articlesCmd;
+		this.articles = articlesCmd;
 	}
-	
-	
+
 }
