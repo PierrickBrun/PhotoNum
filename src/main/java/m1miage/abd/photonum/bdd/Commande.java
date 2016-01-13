@@ -1,4 +1,4 @@
-package m1miage.abd.photonum;
+package m1miage.abd.photonum.bdd;
 
 import java.util.ArrayList;
 import java.util.Date;

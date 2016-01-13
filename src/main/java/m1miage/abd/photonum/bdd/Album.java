@@ -1,4 +1,4 @@
-package m1miage.abd.photonum;
+package m1miage.abd.photonum.bdd;
 
 public class Album {
 
