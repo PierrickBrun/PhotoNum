@@ -2,6 +2,7 @@ package m1miage.abd.photonum.db;
 
 public class Photo {
 
+	private int idPhoto;
 	private Album album;
 	private Fichier fichier;
 	private String titre;
@@ -51,6 +52,10 @@ public class Photo {
 
 	public Fichier getFichier() {
 		return fichier;
+	}
+
+	public int getId() {
+		return idPhoto;
 	}
 
 }

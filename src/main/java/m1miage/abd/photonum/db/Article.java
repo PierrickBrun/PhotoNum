@@ -2,6 +2,7 @@ package m1miage.abd.photonum.db;
 
 public class Article {
 
+	private int idArticle;
 	private Commande commande;
 	private Album album;
 	private int quantite;
@@ -40,6 +41,10 @@ public class Article {
 
 	public float getPrix() {
 		return this.prix;
+	}
+
+	public int getId() {
+		return this.idArticle;
 	}
 
 }
