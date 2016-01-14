@@ -3,7 +3,7 @@ package m1miage.abd.photonum.db;
 import java.util.Date;
 
 public class Livraison {
-	
+
 	private int idLivraison;
 	private Commande commande;
 	private Date date;
@@ -15,12 +15,12 @@ public class Livraison {
 		this.status = "En cours";
 	}
 
-	public Commande getCmd() {
+	public Commande getCommande() {
 		return commande;
 	}
 
-	public void setCmd(Commande cmd) {
-		this.commande = cmd;
+	public void setCommande(Commande commande) {
+		this.commande = commande;
 	}
 
 	public Date getDate() {
@@ -38,7 +38,7 @@ public class Livraison {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public int getIdLivraison() {
 		return idLivraison;
 	}
