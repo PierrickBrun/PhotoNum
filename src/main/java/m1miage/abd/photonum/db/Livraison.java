@@ -3,6 +3,8 @@ package m1miage.abd.photonum.db;
 import java.util.Date;
 
 public class Livraison {
+	
+	private int idLivraison;
 	private Commande commande;
 	private Date date;
 	private String status;
