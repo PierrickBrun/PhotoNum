@@ -3,5 +3,4 @@
 /.DS_Store
 /lib/*.jar
 /lib/
-/.classpath
-.project
+
