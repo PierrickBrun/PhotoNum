@@ -38,5 +38,13 @@ public class Livraison {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public int getIdLivraison() {
+		return idLivraison;
+	}
+
+	public void setIdLivraison(int idLivraison) {
+		this.idLivraison = idLivraison;
+	}
 
 }
