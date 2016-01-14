@@ -1,7 +1,15 @@
 package m1miage.abd.photonum.db;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Client {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idClient;
 	private String nom;
 	private String prenom;
@@ -64,5 +72,12 @@ public class Client {
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
+
+	@Override
+	public String toString() {
+		return "Client [idClient=" + idClient + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail + ", adresse="
+				+ adresse + ", mdp=" + mdp + "]";
+	}
+	
 
 }
