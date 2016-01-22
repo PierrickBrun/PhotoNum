@@ -15,7 +15,7 @@ public class DatabaseAccessProperties {
     private Properties prop = new Properties();
     private String jdbcDriver;
     private String dbUrl;
-    private String username, password;
+    private String username, password, sshHost, sshUser, sshPass;
     
     public DatabaseAccessProperties(String propertiesFile) {
         try {
@@ -39,6 +39,9 @@ public class DatabaseAccessProperties {
         dbUrl = prop.getProperty("database.url");
         username = prop.getProperty("database.username");
         password = prop.getProperty("database.password");
+        sshHost = prop.getProperty("ssh.host");
+        sshUser = prop.getProperty("ssh.username");
+        sshPass = prop.getProperty("ssh.password");
        }
     public String getJdbcDriver() {
         return jdbcDriver;
@@ -49,8 +52,24 @@ public class DatabaseAccessProperties {
     public String getUsername() {
         return username;
     }
-    public String getPassword() {
-        return password;
+    public String getPassword(){
+    	return password;
+    }
+    public String getSSHHost() {
+        return sshHost;
+    }
+    public String getSSHUsername() {
+        return sshUser;
+    }
+    public String getSSHPassword() {
+        return sshPass;
+    }
+    public boolean useTunneling() {
+    	if(prop.getProperty("ssh.use").equals("true")){
+    		return true;
+    	}else{
+    		return false;
+    	}        
     }
 }
  
