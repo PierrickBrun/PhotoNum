@@ -1,4 +1,4 @@
-package m1miage.abd.photonum.db;
+package m1miage.abd.photonum.model;
 
 public class Photo {
 

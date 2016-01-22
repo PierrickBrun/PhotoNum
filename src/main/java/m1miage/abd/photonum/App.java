@@ -1,7 +1,7 @@
 package m1miage.abd.photonum;
 
-import m1miage.abd.photonum.db.Album;
-import m1miage.abd.photonum.db.Client;
+import m1miage.abd.photonum.model.Album;
+import m1miage.abd.photonum.model.Client;
 
 /**
  * Hello world!
