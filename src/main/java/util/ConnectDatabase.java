@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 class ConnectDatabase {
 
-	private static final String configurationFile = "BD.properties";
+	private static final String configurationFile = "config/BD.properties";
 
 	public static void main(String args[]) {
 		try {
