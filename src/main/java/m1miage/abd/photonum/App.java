@@ -15,6 +15,8 @@ public class App {
 	public static void main(String[] args) {
 
 		Connection db = ConnectDatabase.getConnection();
+		db = ConnectDatabase.getConnection();
+		
 		
 		/*Client client = new Client("  ", "  ", "  ", "  ", "  ");
 
