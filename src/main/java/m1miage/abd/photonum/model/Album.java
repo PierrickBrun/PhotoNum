@@ -20,6 +20,9 @@ public class Album {
 	private static final String tCalendrierMural = "CALENDRIERMURAL";
 	private static final String tCalendrierBureau = "CALENDRIERBUREAU";*/
 
+	public Album() {
+	}
+	
 	public Album(Client client, String talbum, String titre, int nbpages) {
 		this.client = client;
 		affecterType(talbum);

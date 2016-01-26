@@ -10,7 +10,7 @@ public class Commande {
 	private float prixTotal;
 	private String statut;
 	private ArrayList<Article> articles;
-
+	
 	public Commande() {
 		this.dateCommande = new Date();
 		this.prixTotal = 0;

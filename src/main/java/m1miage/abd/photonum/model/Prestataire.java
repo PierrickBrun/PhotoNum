@@ -7,6 +7,15 @@ public class Prestataire {
 	private String adresse;
 	private String telephone;
 	
+	public Prestataire(){
+	}
+	
+	public Prestataire(String nom, String adresse, String telephone){
+		this.nom = nom;
+		this.adresse = adresse;
+		this.telephone = telephone;
+	}
+	
 	public int getIdPrestataire() {
 		return IdPrestataire;
 	}

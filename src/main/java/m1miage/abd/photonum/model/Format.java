@@ -9,6 +9,7 @@ public class Format {
 	private float vitesseImpression;
 	private int stockPapier;
 
+	public Format(){};
 
 	public Format(String libelle, String resolutionMinimale, float vitesseImpression, int stockPapier, String type) {
 		this.libelle = libelle;

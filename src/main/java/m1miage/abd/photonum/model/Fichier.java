@@ -8,6 +8,9 @@ public class Fichier {
 	private String priseDeVue;
 	private String resolution;
 
+	
+	public Fichier(){}
+	
 	public Fichier(String chemin, String priseDeVue, String resolution) {
 		this.chemin = chemin;
 		this.partage = false;
