@@ -19,7 +19,6 @@ public class ConnectDatabase {
 		}else{
 			Session session = null;
 			try {
-
 				String jdbcDriver, dbUrl, username, password;
 				DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
 				jdbcDriver = dap.getJdbcDriver();
@@ -32,8 +31,14 @@ public class ConnectDatabase {
 					java.util.Properties config = new java.util.Properties(); 
 					config.put("StrictHostKeyChecking", "no");
 					JSch jsch = new JSch();
-					session=jsch.getSession(dap.getSSHUsername(), dap.getSSHHost(), 22);
-					session.setPassword(dap.getSSHPassword());
+					if(dap.promptForCredentials()){
+						String[] creds = dap.getCredentials();
+						session=jsch.getSession(creds[0], dap.getSSHHost(), 22);
+						session.setPassword(creds[1]);
+					}else{
+						session=jsch.getSession(dap.getSSHUsername(), dap.getSSHHost(), 22);
+						session.setPassword(dap.getSSHPassword());
+					}
 					session.setConfig(config);
 					session.connect();
 					System.out.println("SSH Tunnel connected");
