@@ -7,9 +7,11 @@ public class Commande {
 
 	private int idCommande;
 	private Date dateCommande;
+	private Promotion promotion;
 	private float prixTotal;
 	private String statut;
 	private ArrayList<Article> articles;
+	private Client client;
 	
 	public Commande() {
 		this.dateCommande = new Date();
@@ -32,6 +34,13 @@ public class Commande {
 
 	public void setDateCommande(Date dateCommande) {
 		this.dateCommande = dateCommande;
+	}
+	public Promotion getPromotion() {
+		return promotion;
+	}
+
+	public void setPromotion(Promotion promotion) {
+		this.promotion = promotion;
 	}
 
 	public float getPrixTotal() {
@@ -57,5 +66,14 @@ public class Commande {
 	public void setArticlesCmd(ArrayList<Article> articlesCmd) {
 		this.articles = articlesCmd;
 	}
+	
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
 
 }

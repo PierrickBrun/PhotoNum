@@ -2,6 +2,7 @@ package m1miage.abd.photonum.model;
 
 public class Promotion {
 
+	private int IdPromotion;
 	private Commande commandeDelivre;
 	private Commande commandeUtilise;
 	private float montant;
@@ -14,6 +15,14 @@ public class Promotion {
 	
 	public Promotion(){}
 	
+	public int getIdPromotion() {
+		return IdPromotion;
+	}
+
+	public void setIdPromotion(int idPromotion) {
+		IdPromotion = idPromotion;
+	}
+
 	public Commande getCommandeUtilise() {
 		return commandeUtilise;
 	}
