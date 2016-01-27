@@ -17,7 +17,7 @@ public class App {
 
 		Connection db = ConnectDatabase.getConnection();
 		ClientDAO client = new ClientDAO(db);
-		System.out.println(client.getAllUsers().get(0).getNom());
+		System.out.println(client.getAllUsers().get(0).getIdClient());
 		
 		
 		/*Client client = new Client("  ", "  ", "  ", "  ", "  ");
