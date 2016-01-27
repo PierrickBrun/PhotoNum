@@ -17,7 +17,6 @@ public class ConnectDatabase {
 
 	public static synchronized Connection getConnection(){
 		if(connexion == null){
-			System.out.println("NULL");
 			Session session = null;
 			try {
 				String jdbcDriver, dbUrl, username, password;
