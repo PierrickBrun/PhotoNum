@@ -75,7 +75,7 @@ public class ClientDAO {
 	    public void majID(Client user){
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("select * from CLIENT where NOM=?, PRENOM=?");
-	            preparedStatement.setInt(1, userId);
+	            //preparedStatement.setInt(1, userId);
 	            ResultSet rs = preparedStatement.executeQuery();
 	            if (rs.next()) {	
 	            	 user.setIdClient(rs.getInt("IDCLIENT"));
@@ -139,7 +139,8 @@ public class ClientDAO {
 	    public Client getUserByMail(String userMail) {
 	        Client user = new Client();
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("select * from CLIENT where MAIL=?");
+	        	
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from CLIENT where dbms_lob.compare(MAIL, ?) = 0");
 	            preparedStatement.setString(1, userMail);
 	            ResultSet rs = preparedStatement.executeQuery();
 	            if (rs.next()) {	
@@ -149,7 +150,7 @@ public class ClientDAO {
 		             user.setMail(rs.getString("MAIL"));
 		             user.setAdresse(rs.getString("ADRESSE"));
 		             user.setMdp(rs.getString("MOT_DE_PASSE"));
-		             System.out.println("Client trouvé :"+user.getNom());
+		             System.out.println("Client trouvé : "+user.getNom());
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
