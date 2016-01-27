@@ -19,8 +19,7 @@ public class PhotoDAO {
 
 	public void addPhoto(Photo photo) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(
-					"insert into PHOTO (TITRE, COMMENTAIRE, PAGE, IDALBUM, IDPHOTO) values (?, ?, ?, ?, ? )");
+			PreparedStatement preparedStatement = connection.prepareStatement("insert into PHOTO (TITRE, COMMENTAIRE, PAGE, IDALBUM, IDPHOTO) values (?, ?, ?, ?, ? )");
 			preparedStatement.setString(1, photo.getTitre());
 			preparedStatement.setString(2, photo.getCommentaire());
 			preparedStatement.setInt(3, photo.getPage());
@@ -34,8 +33,7 @@ public class PhotoDAO {
 
 	public void deletePhoto(int photoId) {
 		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("delete from PHOTO where IDPHOTO=" + photoId);
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from PHOTO where IDPHOTO=" + photoId);
 			// Parameters start with 1
 			preparedStatement.setInt(1, photoId);
 			preparedStatement.executeUpdate();
@@ -46,9 +44,7 @@ public class PhotoDAO {
 
 	public void updatePhoto(Photo photo) {
 		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("update PHOTO set IDALBUM=?, TITRE=?, COMMENTAIRE=?, IDFICHIER=?, PAGE=?"
-							+ "where IDPHOTO=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("update PHOTO set IDALBUM=?, TITRE=?, COMMENTAIRE=?, IDFICHIER=?, PAGE=?"+ "where IDPHOTO=?");
 			preparedStatement.setInt(1, photo.getAlbum().getIdAlbum());
 			preparedStatement.setString(2, photo.getTitre());
 			preparedStatement.setString(3, photo.getCommentaire());
@@ -67,6 +63,7 @@ public class PhotoDAO {
 			ResultSet rs = statement.executeQuery("select * from PHOTO");
 			while (rs.next()) {
 				Photo photo = new Photo();
+				photo.setIdPhoto(rs.getInt("IDPHOTO"));
 				photo.setTitre(rs.getString("TITRE"));
 				photo.setCommentaire(rs.getString("COMMENTAIRE"));
 				photo.setPage(rs.getInt("PAGE"));

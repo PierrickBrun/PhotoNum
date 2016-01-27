@@ -6,6 +6,7 @@ public class Prestataire {
 	private String nom;
 	private String adresse;
 	private String telephone;
+	private String activite;
 	
 	public Prestataire(){
 	}
@@ -41,5 +42,13 @@ public class Prestataire {
 		this.telephone = telephone;
 	}
 	
+	public String getActivite() {
+		return activite;
+	}
+
+	public void setActivite(String activite) {
+		this.activite = activite;
+	}
+
 	
 }
