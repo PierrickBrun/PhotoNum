@@ -33,7 +33,7 @@ public class ClientDAO {
 	            preparedStatement.setString(4, user.getAdresse());
 	            preparedStatement.setString(5, user.getMdp());
 	            preparedStatement.executeUpdate();
-	            System.out.println("Le client "+user.getNom()+" a bien ÈtÈ ajoutÈ");
+	            System.out.println("Le client "+user.getNom()+" a bien √©t√© ajout√©");
 	            
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -66,30 +66,29 @@ public class ClientDAO {
 	            preparedStatement.setString(5, user.getMdp());
 	            preparedStatement.setInt(6, user.getIdClient());
 	            preparedStatement.executeUpdate();
-	            System.out.println("Le client "+user.getNom()+" a bien ÈtÈ mis ‡ jour");
+	            System.out.println("Le client "+user.getNom()+" a bien √©t√© mis √† jour");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 
 	    public void majID(Client user){
-	    	Statement statement;
-			try {
-				statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery("select * from Client");
-				if (rs.next()) {	
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from CLIENT where NOM=?, PRENOM=?");
+	            preparedStatement.setInt(1, userId);
+	            ResultSet rs = preparedStatement.executeQuery();
+	            if (rs.next()) {	
 	            	 user.setIdClient(rs.getInt("IDCLIENT"));
 		             user.setNom(rs.getString("NOM"));
 		             user.setPrenom(rs.getString("PRENOM"));
 		             user.setMail(rs.getString("MAIL"));
 		             user.setAdresse(rs.getString("ADRESSE"));
 		             user.setMdp(rs.getString("MOT_DE_PASSE"));
+		             System.out.println("Client trouv√© :"+user.getNom());
 	            }
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 	    }
 
 
@@ -129,7 +128,7 @@ public class ClientDAO {
 		             user.setMail(rs.getString("MAIL"));
 		             user.setAdresse(rs.getString("ADRESSE"));
 		             user.setMdp(rs.getString("MOT_DE_PASSE"));
-		             System.out.println("Client trouvÈ :"+user.getNom());
+		             System.out.println("Client trouv√© :"+user.getNom());
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -150,7 +149,7 @@ public class ClientDAO {
 		             user.setMail(rs.getString("MAIL"));
 		             user.setAdresse(rs.getString("ADRESSE"));
 		             user.setMdp(rs.getString("MOT_DE_PASSE"));
-		             System.out.println("Client trouvÈ :"+user.getNom());
+		             System.out.println("Client trouv√© :"+user.getNom());
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
