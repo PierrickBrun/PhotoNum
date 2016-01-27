@@ -10,8 +10,6 @@ import java.util.List;
 
 import m1miage.abd.photonum.model.Article;
 
-import  util.DatabaseAccessProperties;
-
 public class ArticleDAO {
 
 	 private Connection connection;
@@ -26,12 +24,12 @@ public class ArticleDAO {
 
 	            // Parameters start with 1
 	  // IDARTICLE
-	            preparedStatement.setInt(2, article.getCommande().getIdCommande());
-	            preparedStatement.setInt(3, article.getAlbum().getIdAlbum());
-	            preparedStatement.setInt(4, article.getFormat().getIdFormat());	            
-	            preparedStatement.setInt(5, article.getPrestataire().getIdPrestataire());	            
-	            preparedStatement.setInt(6, article.getQuantite());
-	            preparedStatement.setFloat(7, article.getPrix());
+	            preparedStatement.setInt(1, article.getCommande().getIdCommande());
+	            preparedStatement.setInt(2, article.getAlbum().getIdAlbum());
+	            preparedStatement.setInt(3, article.getFormat().getIdFormat());	            
+	            preparedStatement.setInt(4, article.getPrestataire().getIdPrestataire());	            
+	            preparedStatement.setInt(5, article.getQuantite());
+	            preparedStatement.setFloat(6, article.getPrix());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -56,12 +54,12 @@ public class ArticleDAO {
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("update ARTICLE set IDCOMMANDE=?, IDALBUM=?, IDFORMAT=?, IDPRESTATAIRE=?, QUANTITE=?, PRIX=?" +"where IDARTICLE=?");
 	            // Parameters start with 1
-	            preparedStatement.setInt(2, article.getCommande().getIdCommande());
-	            preparedStatement.setInt(3, article.getAlbum().getIdAlbum());
-	            preparedStatement.setInt(4, article.getFormat().getIdFormat());	            
-	            preparedStatement.setInt(5, article.getPrestataire().getIdPrestataire());	            
-	            preparedStatement.setInt(6, article.getQuantite());
-	            preparedStatement.setFloat(7, article.getPrix());
+	            preparedStatement.setInt(1, article.getCommande().getIdCommande());
+	            preparedStatement.setInt(2, article.getAlbum().getIdAlbum());
+	            preparedStatement.setInt(3, article.getFormat().getIdFormat());	            
+	            preparedStatement.setInt(4, article.getPrestataire().getIdPrestataire());	            
+	            preparedStatement.setInt(5, article.getQuantite());
+	            preparedStatement.setFloat(6, article.getPrix());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -76,13 +74,17 @@ public class ArticleDAO {
 	        try {
 	            Statement statement = connection.createStatement();
 	            ResultSet rs = statement.executeQuery("select * from ARTICLE");
+	            CommandeDAO commandeDAO = new CommandeDAO(connection);
+	            AlbumDAO albumDAO = new AlbumDAO(connection);
+	            FormatDAO formatDAO = new FormatDAO(connection);
+	            PrestataireDAO prestataireDAO = new PrestataireDAO(connection);	            
 	            while (rs.next()) {
 	            	Article article = new Article();
 	            	article.setIdArticle(rs.getInt("IDARTICLE"));
-	            	article.getCommande().setIdCommande(rs.getInt("IDCOMMANDE"));
-	            	article.getAlbum().setIdAlbum(rs.getInt("IDALBUM"));
-	            	article.getFormat().setIdFormat(rs.getInt("IDFORMAT"));
-	            	article.getPrestataire().setIdPrestataire(rs.getInt("IDPRESTATAIRE"));
+	            	article.setCommande(commandeDAO.getCommandeById(rs.getInt("IDCOMMANDE")));
+	            	article.setAlbum(albumDAO.getAlbumById(rs.getInt("IDALBUM")));
+	            	article.setFormat(formatDAO.getFormatById(rs.getInt("IDFORMAT")));
+	            	article.setPrestataire(prestataireDAO.getPrestataireById(rs.getInt("IDPRESTATAIRE")));
 	            	article.setQuantite(rs.getInt("QUANTITE"));
 	            	article.setPrix(rs.getFloat("PRIX"));
 	            	articles.add(article);              
@@ -101,11 +103,15 @@ public class ArticleDAO {
 	            PreparedStatement preparedStatement = connection.prepareStatement("select * from ARTICLE where IDARTICLE="+articleId);
 	            //preparedStatement.setInt(1, userId);
 	            ResultSet rs = preparedStatement.executeQuery();
+	            CommandeDAO commandeDAO = new CommandeDAO(connection);
+	            AlbumDAO albumDAO = new AlbumDAO(connection);
+	            FormatDAO formatDAO = new FormatDAO(connection);
+	            PrestataireDAO prestataireDAO = new PrestataireDAO(connection);	
 	            if (rs.next()) {
-	            	article.getCommande().setIdCommande(rs.getInt("IDCOMMANDE"));
-	            	article.getAlbum().setIdAlbum(rs.getInt("IDALBUM"));
-	            	article.getFormat().setIdFormat(rs.getInt("IDFORMAT"));
-	            	article.getPrestataire().setIdPrestataire(rs.getInt("IDPRESTATAIRE"));
+	            	article.setCommande(commandeDAO.getCommandeById(rs.getInt("IDCOMMANDE")));
+	            	article.setAlbum(albumDAO.getAlbumById(rs.getInt("IDALBUM")));
+	            	article.setFormat(formatDAO.getFormatById(rs.getInt("IDFORMAT")));
+	            	article.setPrestataire(prestataireDAO.getPrestataireById(rs.getInt("IDPRESTATAIRE")));
 	            	article.setQuantite(rs.getInt("QUANTITE"));
 	            	article.setPrix(rs.getFloat("PRIX"));
 	            }
