@@ -8,6 +8,7 @@ public class Livraison {
 	private Commande commande;
 	private Date date;
 	private String status;
+	private Article article;
 
 	public Livraison(){}
 	
@@ -48,5 +49,14 @@ public class Livraison {
 	public void setIdLivraison(int idLivraison) {
 		this.idLivraison = idLivraison;
 	}
+	
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
 
 }

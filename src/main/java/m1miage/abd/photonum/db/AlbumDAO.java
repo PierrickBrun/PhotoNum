@@ -9,8 +9,6 @@ import java.util.List;
 
 import m1miage.abd.photonum.model.Album;
 
-import  util.DatabaseAccessProperties;
-
 public class AlbumDAO {
 
 	 private Connection connection;
@@ -25,12 +23,12 @@ public class AlbumDAO {
 
 	            // Parameters start with 1
 	  // IDALBUM
-	            preparedStatement.setInt(2, album.getClient().getIdClient());
-	            preparedStatement.setString(3, album.getTitre());
-	            preparedStatement.setString(4, album.getPreface());	            
-	            preparedStatement.setString(5, album.getPostface());	            
-	            preparedStatement.setInt(6, album.getNbPage());
-	            preparedStatement.setString(7, album.getTypeAlbum());
+	            preparedStatement.setInt(1, album.getClient().getIdClient());
+	            preparedStatement.setString(2, album.getTitre());
+	            preparedStatement.setString(3, album.getPreface());	            
+	            preparedStatement.setString(4, album.getPostface());	            
+	            preparedStatement.setInt(5, album.getNbPage());
+	            preparedStatement.setString(6, album.getTypeAlbum());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -55,12 +53,12 @@ public class AlbumDAO {
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("update ALBUM set IDCLIENT=?, TITRE=?, PREFACE=?, POSTFACE=?, NBPAGE=?, TYPE=?" +"where IDALBUM=?");
 	            // Parameters start with 1
-	            preparedStatement.setInt(2, album.getClient().getIdClient());
-	            preparedStatement.setString(3, album.getTitre());
-	            preparedStatement.setString(4, album.getPreface());	            
-	            preparedStatement.setString(5, album.getPostface());	            
-	            preparedStatement.setInt(6, album.getNbPage());
-	            preparedStatement.setString(7, album.getTypeAlbum());
+	            preparedStatement.setInt(1, album.getClient().getIdClient());
+	            preparedStatement.setString(2, album.getTitre());
+	            preparedStatement.setString(3, album.getPreface());	            
+	            preparedStatement.setString(4, album.getPostface());	            
+	            preparedStatement.setInt(5, album.getNbPage());
+	            preparedStatement.setString(6, album.getTypeAlbum());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -75,10 +73,11 @@ public class AlbumDAO {
 	        try {
 	            Statement statement = connection.createStatement();
 	            ResultSet rs = statement.executeQuery("select * from ALBUM");
+	            ClientDAO clientDAO = new ClientDAO(connection);
 	            while (rs.next()) {
 	            	Album album = new Album();
 	            	album.setIdAlbum(rs.getInt("IDALBUM"));
-	            	album.getClient().setIdClient(rs.getInt("IDCLIENT"));
+	            	album.setClient(clientDAO.getUserById(rs.getInt("IDCLIENT")));
 	            	album.setTitre(rs.getString("TITRE"));
 	            	album.setPreface(rs.getString("PREFACE"));
 	            	album.setPostface(rs.getString("POSTFACE"));
@@ -100,9 +99,9 @@ public class AlbumDAO {
 	            PreparedStatement preparedStatement = connection.prepareStatement("select * from ALBUM where IDALBUM="+albumId);
 	            //preparedStatement.setInt(1, userId);
 	            ResultSet rs = preparedStatement.executeQuery();
+	            ClientDAO clientDAO = new ClientDAO(connection);
 	            if (rs.next()) {	            	
-	            	album.getClient().setIdClient(rs.getInt("IDCLIENT"));
-	            	album.setTitre(rs.getString("TITRE"));
+	            	album.setClient(clientDAO.getUserById(rs.getInt("IDCLIENT")));	            	album.setTitre(rs.getString("TITRE"));
 	            	album.setPreface(rs.getString("PREFACE"));
 	            	album.setPostface(rs.getString("POSTFACE"));
 	                album.setNbPage(rs.getInt("NBPAGE"));

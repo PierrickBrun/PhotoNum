@@ -20,13 +20,11 @@ public class FichierDAO {
 	 public void addFichier(Fichier fichier) {
 		 try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("insert into FICHIER (IDCLIENT, CHEMIN, PARTAGE, PRISEDEVUE, RESOLUTION) values (?, ?, ?, ?, ? )");
-	            // Parameters start with 1
-	  // IDFICHIER
-	            preparedStatement.setInt(2, fichier.getClient().getIdClient());
-	            preparedStatement.setString(3, fichier.getChemin());
-	            preparedStatement.setBoolean(4, fichier.isPartage());	            
-	            preparedStatement.setString(5, fichier.getPriseDeVue());	            
-	            preparedStatement.setString(6, fichier.getResolution());
+	            preparedStatement.setInt(1, fichier.getClient().getIdClient());
+	            preparedStatement.setString(2, fichier.getChemin());
+	            preparedStatement.setBoolean(3, fichier.isPartage());	            
+	            preparedStatement.setString(4, fichier.getPriseDeVue());	            
+	            preparedStatement.setString(5, fichier.getResolution());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -38,7 +36,6 @@ public class FichierDAO {
 	    public void deleteFichier (int fichierId) {
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("delete from FICHIER where IDFICHIER="+fichierId);
-	            // Parameters start with 1
 	            preparedStatement.setInt(1, fichierId);
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
@@ -50,12 +47,11 @@ public class FichierDAO {
 	    public void updateFichier(Fichier fichier) {
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("update FICHIER set IDCLIENT=?, CHEMIN=?, PARTAGE=?, PRISEDEVUE=?, RESOLUTION=?" +"where IDFICHIER=?");
-	            // Parameters start with 1
-	            preparedStatement.setInt(2, fichier.getClient().getIdClient());
-	            preparedStatement.setString(3, fichier.getChemin());
-	            preparedStatement.setBoolean(4, fichier.isPartage());	            
-	            preparedStatement.setString(5, fichier.getPriseDeVue());	            
-	            preparedStatement.setString(6, fichier.getResolution());
+	            preparedStatement.setInt(1, fichier.getClient().getIdClient());
+	            preparedStatement.setString(2, fichier.getChemin());
+	            preparedStatement.setBoolean(3, fichier.isPartage());	            
+	            preparedStatement.setString(4, fichier.getPriseDeVue());	            
+	            preparedStatement.setString(5, fichier.getResolution());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -70,10 +66,11 @@ public class FichierDAO {
 	        try {
 	            Statement statement = connection.createStatement();
 	            ResultSet rs = statement.executeQuery("select * from FICHIER");
+	            ClientDAO clientDAO = new ClientDAO(connection);
 	            while (rs.next()) {
 	            	Fichier fichier = new Fichier();
 	            	fichier.setIdFichier(rs.getInt("IDFICHIER"));
-	            	fichier.getClient().setIdClient(rs.getInt("IDCLIENT"));
+	            	fichier.setClient(clientDAO.getUserById(rs.getInt("IDCLIENT")));
 	            	fichier.setChemin(rs.getString("CHEMIN"));
 	            	fichier.setPartage(rs.getBoolean("PARTAGE"));
 	            	fichier.setPriseDeVue(rs.getString("PRISEDEVUE"));
@@ -90,10 +87,10 @@ public class FichierDAO {
 	        Fichier fichier = new Fichier();
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("select * from FICHIER where IDFICHIER="+fichierId);
-	            //preparedStatement.setInt(1, userId);
 	            ResultSet rs = preparedStatement.executeQuery();
+	            ClientDAO clientDAO = new ClientDAO(connection);
 	            if (rs.next()) {	            	
-	            	fichier.getClient().setIdClient(rs.getInt("IDCLIENT"));
+	            	fichier.setClient(clientDAO.getUserById(rs.getInt("IDCLIENT")));
 	            	fichier.setChemin(rs.getString("CHEMIN"));
 	            	fichier.setPartage(rs.getBoolean("PARTAGE"));
 	            	fichier.setPriseDeVue(rs.getString("PRISEDEVUE"));
