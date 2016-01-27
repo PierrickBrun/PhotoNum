@@ -55,11 +55,12 @@ public class ClientDAO {
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("update CLIENT set NOM=?, PRENOM=?, MAIL=?, MOT_DE_PASSE=?" +"where userid=?");
 	            // Parameters start with 1
+	            preparedStatement.setInt(1, user.getIdClient());
 	            preparedStatement.setString(2, user.getNom());
-	            preparedStatement.setString(1, user.getPrenom());
-	            preparedStatement.setString(3, user.getMail());	            
-	            preparedStatement.setString(4, user.getAdresse());
-	            preparedStatement.setString(5, user.getMdp());
+	            preparedStatement.setString(3, user.getPrenom());
+	            preparedStatement.setString(4, user.getMail());	            
+	            preparedStatement.setString(5, user.getAdresse());
+	            preparedStatement.setString(6, user.getMdp());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -95,15 +96,16 @@ public class ClientDAO {
 	    public Client getUserById(int userId) {
 	        Client user = new Client();
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where userid=?");
-	            //preparedStatement.setInt(1, userId);
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from CLIENT where IDCLIENT="+userId);
+	            preparedStatement.setInt(1, userId);
 	            ResultSet rs = preparedStatement.executeQuery();
-	            if (rs.next()) {	            	
-		             user.setNom(rs.getString("nom"));
-		             user.setPrenom(rs.getString("prenom"));
-		             user.setMail(rs.getString("mail"));
-		             user.setAdresse(rs.getString("adresse"));
-		             user.setMdp(rs.getString("mdp"));
+	            if (rs.next()) {	
+	            	 user.setIdClient(rs.getInt("IDCLIENT"));
+		             user.setNom(rs.getString("NOM"));
+		             user.setPrenom(rs.getString("PRENOM"));
+		             user.setMail(rs.getString("MAIL"));
+		             user.setAdresse(rs.getString("ADRESSE"));
+		             user.setMdp(rs.getString("MOT_DE_PASSE"));
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
