@@ -33,6 +33,8 @@ public class ClientDAO {
 	            preparedStatement.setString(4, user.getAdresse());
 	            preparedStatement.setString(5, user.getMdp());
 	            preparedStatement.executeUpdate();
+	            majID(user);
+	            //this.connection.commit();
 	            System.out.println("Le client "+user.getNom()+" a bien été ajouté");
 	            
 	        } catch (SQLException e) {
@@ -48,6 +50,7 @@ public class ClientDAO {
 	            // Parameters start with 1
 	            preparedStatement.setInt(1, clientId);
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -66,6 +69,7 @@ public class ClientDAO {
 	            preparedStatement.setString(5, user.getMdp());
 	            preparedStatement.setInt(6, user.getIdClient());
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
 	            System.out.println("Le client "+user.getNom()+" a bien été mis à jour");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -74,8 +78,12 @@ public class ClientDAO {
 
 	    public void majID(Client user){
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("select * from CLIENT where NOM=?, PRENOM=?");
-	            //preparedStatement.setInt(1, userId);
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from CLIENT where dbms_lob.compare(MAIL, ?)= 0");
+	            preparedStatement.setString(1, user.getMail());/*
+	            preparedStatement.setString(2, user.getPrenom());
+	            preparedStatement.setString(3, user.getMail());
+	            preparedStatement.setString(4, user.getAdresse());
+	            preparedStatement.setString(5, user.getMdp());*/
 	            ResultSet rs = preparedStatement.executeQuery();
 	            if (rs.next()) {	
 	            	 user.setIdClient(rs.getInt("IDCLIENT"));
@@ -84,7 +92,8 @@ public class ClientDAO {
 		             user.setMail(rs.getString("MAIL"));
 		             user.setAdresse(rs.getString("ADRESSE"));
 		             user.setMdp(rs.getString("MOT_DE_PASSE"));
-		             System.out.println("Client trouvé :"+user.getNom());
+		             this.connection.commit();
+		             System.out.println("Id client mis à jour :"+user.getNom()+" id: "+user.getIdClient());
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -105,7 +114,7 @@ public class ClientDAO {
 	                user.setMail(rs.getString("MAIL"));
 	                user.setAdresse(rs.getString("ADRESSE"));
 	                user.setMdp(rs.getString("MOT_DE_PASSE"));
-	                users.add(user);              
+	                users.add(user);
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
