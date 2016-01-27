@@ -22,11 +22,11 @@ public class FormatDAO {
 	            PreparedStatement preparedStatement = connection.prepareStatement("insert into FORMAT (LIBELLE, PRIXUNITAIRE, RESOLUTIONMINIMALE, VITESSEIMPRESSION, STOCKPAPIER) values (?, ?, ?, ?, ? )");
 	            // Parameters start with 1
 	  // IDFORMAT
-	            preparedStatement.setString(2, format.getLibelle());
-	            preparedStatement.setFloat(3, format.getPrixUnitaire());
-	            preparedStatement.setString(4, format.getResolutionMinimale());	            
-	            preparedStatement.setFloat(5, format.getVitesseImpression());	            
-	            preparedStatement.setInt(6, format.getStockPapier());
+	            preparedStatement.setString(1, format.getLibelle());
+	            preparedStatement.setFloat(2, format.getPrixUnitaire());
+	            preparedStatement.setString(3, format.getResolutionMinimale());	            
+	            preparedStatement.setFloat(4, format.getVitesseImpression());	            
+	            preparedStatement.setInt(5, format.getStockPapier());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -51,11 +51,11 @@ public class FormatDAO {
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("update FORMAT set LIBELLE=?, PRIXUNITAIRE=?, RESOLUTIONMINIMALE=?, VITESSEIMPRESSION=?, STOCKPAPIER=?" +"where IDFORMAT=?");
 	            // Parameters start with 1
-	            preparedStatement.setString(2, format.getLibelle());
-	            preparedStatement.setFloat(3, format.getPrixUnitaire());
-	            preparedStatement.setString(4, format.getResolutionMinimale());	            
-	            preparedStatement.setFloat(5, format.getVitesseImpression());	            
-	            preparedStatement.setInt(6, format.getStockPapier());
+	            preparedStatement.setString(1, format.getLibelle());
+	            preparedStatement.setFloat(2, format.getPrixUnitaire());
+	            preparedStatement.setString(3, format.getResolutionMinimale());	            
+	            preparedStatement.setFloat(4, format.getVitesseImpression());	            
+	            preparedStatement.setInt(5, format.getStockPapier());
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {
 	            e.printStackTrace();

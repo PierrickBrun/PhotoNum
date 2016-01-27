@@ -56,8 +56,12 @@ public class Photo {
 		return fichier;
 	}
 
-	public int getId() {
+	public int getIdPhoto() {
 		return idPhoto;
+	}
+
+	public void setIdPhoto(int idPhoto) {
+		this.idPhoto = idPhoto;
 	}
 
 }
