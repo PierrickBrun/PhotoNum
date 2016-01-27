@@ -9,6 +9,8 @@ public class Client {
 	private String adresse;
 	private String mdp;
 
+	public Client(){}
+	
 	public Client(String nom, String prenom, String mail, String adresse, String mdp) {
 		this.nom = nom;
 		this.prenom = prenom;

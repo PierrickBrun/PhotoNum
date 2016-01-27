@@ -9,6 +9,8 @@ public class Photo {
 	private String commentaire;
 	private int page;
 
+	public Photo(){}
+	
 	public Photo(Album album, Fichier fichier) {
 		this.album = album;
 		this.fichier = fichier;

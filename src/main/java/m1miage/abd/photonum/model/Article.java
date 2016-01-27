@@ -8,6 +8,10 @@ public class Article {
 	private int quantite;
 	private float prix;
 
+	public Article() {
+	
+	}
+	
 	public Article(Commande commande, Album album, int quantite) {
 		this.album = album;
 		this.prix = 0;

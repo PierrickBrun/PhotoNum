@@ -11,7 +11,9 @@ public class Promotion {
 		float mnt = commandeDelivre.getPrixTotal();
 		this.montant = (5 / 100) * mnt;
 	}
-
+	
+	public Promotion(){}
+	
 	public Commande getCommandeUtilise() {
 		return commandeUtilise;
 	}

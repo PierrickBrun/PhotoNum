@@ -9,6 +9,8 @@ public class Livraison {
 	private Date date;
 	private String status;
 
+	public Livraison(){}
+	
 	public Livraison(Commande commande, Date date) {
 		this.commande = commande;
 		this.date = new Date();

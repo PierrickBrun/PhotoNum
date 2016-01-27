@@ -12,11 +12,12 @@ public class ConnectDatabase {
 
 	private static final String configurationFile = "config/BD.properties";
 	private static Connection connexion  = null;
+	
+	private ConnectDatabase(){}
 
-	public static Connection getConnection(){
-		if(connexion != null){
-			return connexion;
-		}else{
+	public static synchronized Connection getConnection(){
+		if(connexion == null){
+			System.out.println("NULL");
 			Session session = null;
 			try {
 				String jdbcDriver, dbUrl, username, password;
@@ -50,10 +51,10 @@ public class ConnectDatabase {
 				// Load the database driver
 				Class.forName(jdbcDriver);
 				// Get a connection to the database
-				Connection conn = DriverManager.getConnection(dbUrl, username, password);
+				connexion = DriverManager.getConnection(dbUrl, username, password);
 				// Print information about connection warnings
-				SQLWarningsExceptions.printWarnings(conn);
-				conn.close();
+				SQLWarningsExceptions.printWarnings(connexion);
+				//connexion.close();
 			} catch (SQLException se) {
 				// Print information about SQL exceptions
 				SQLWarningsExceptions.printExceptions(se);
