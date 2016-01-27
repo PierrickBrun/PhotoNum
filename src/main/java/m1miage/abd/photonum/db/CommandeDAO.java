@@ -21,9 +21,12 @@ public class CommandeDAO {
 	 public void addCommande(Commande commande) {
 		 try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("insert into COMMANDE (IDPROMOTION, IDCLIENT, DATECOMMANDE, PRIXTOTAL, STATUT) values (?, ?, ?, ?, ? )");
-	            // Parameters start with 1
-	  // IDCOMMANDE
-	            preparedStatement.setInt(1, commande.getPromotion().getIdPromotion());
+
+	            if(commande.getPromotion() == null){
+	            	preparedStatement.setNull(1,java.sql.Types.INTEGER);
+	            }else{	            	
+	            	preparedStatement.setInt(1, commande.getPromotion().getIdPromotion());
+	            }
 	            preparedStatement.setInt(2, commande.getClient().getIdClient());
 	            preparedStatement.setDate(3, new java.sql.Date(commande.getDateCommande().getTime()));	            
 	            preparedStatement.setFloat(4, commande.getPrixTotal());	            
