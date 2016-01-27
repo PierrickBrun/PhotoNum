@@ -53,7 +53,9 @@ public class ConnectDatabase {
 				connexion = DriverManager.getConnection(dbUrl, username, password);
 				// Print information about connection warnings
 				SQLWarningsExceptions.printWarnings(connexion);
-				//connexion.close();
+				
+				
+				connexion.setAutoCommit(false);
 			} catch (SQLException se) {
 				// Print information about SQL exceptions
 				SQLWarningsExceptions.printExceptions(se);
