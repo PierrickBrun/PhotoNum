@@ -87,7 +87,7 @@ public class CommandeDAO {
 	        return commandes;
 	    }
 
-	    public Commande getAlbumById(int commandeId) {
+	    public Commande getCommandeById(int commandeId) {
 	        Commande commande = new Commande();
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("select * from COMMANDE where IDCOMMANDE="+commandeId);

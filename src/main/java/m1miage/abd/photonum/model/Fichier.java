@@ -7,8 +7,8 @@ public class Fichier {
 	private boolean partage;
 	private String priseDeVue;
 	private String resolution;
+	private Client client;
 
-	
 	public Fichier(){}
 	
 	public Fichier(String chemin, String priseDeVue, String resolution) {
@@ -56,6 +56,13 @@ public class Fichier {
 
 	public void setResolution(String resolution) {
 		this.resolution = resolution;
+	}
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 }
