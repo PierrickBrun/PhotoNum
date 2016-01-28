@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import m1miage.abd.photonum.model.Album;
 import m1miage.abd.photonum.model.Article;
 
 public class ArticleDAO {
@@ -66,7 +67,32 @@ public class ArticleDAO {
 	        }
 	    }
 
-
+	    public void majID(Article article){
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from ARTICLE where IDCOMMANDE=? AND IDALBUM=? AND IDFORMAT=?");
+	            preparedStatement.setInt(1, article.getCommande().getIdCommande());
+	            preparedStatement.setInt(2, article.getAlbum().getIdAlbum());
+	            preparedStatement.setInt(3, article.getFormat().getIdFormat());
+	            ResultSet rs = preparedStatement.executeQuery();
+	            CommandeDAO commandeDAO = new CommandeDAO(connection);
+	            AlbumDAO albumDAO = new AlbumDAO(connection);
+	            FormatDAO formatDAO = new FormatDAO(connection);
+	            PrestataireDAO prestataireDAO = new PrestataireDAO(connection);
+	            if (rs.next()) {	
+	            	article.setIdArticle(rs.getInt("IDARTICLE"));
+	            	article.setCommande(commandeDAO.getCommandeById(rs.getInt("IDCOMMANDE")));
+	            	article.setAlbum(albumDAO.getAlbumById(rs.getInt("IDALBUM")));
+	            	article.setFormat(formatDAO.getFormatById(rs.getInt("IDFORMAT")));
+	            	article.setPrestataire(prestataireDAO.getPrestataireById(rs.getInt("IDPRESTATAIRE")));
+	            	article.setQuantite(rs.getInt("QUANTITE"));
+	            	article.setPrix(rs.getFloat("PRIX"));
+		            this.connection.commit();
+		            System.out.println("Idarticle mis à jour pour Commande:"+article.getCommande().getIdCommande()+"et Album:"+article.getAlbum().getIdAlbum()+"et Format:"+article.getFormat().getIdFormat()+". Son id est: "+article.getIdArticle());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 
 	    public List<Article> getAllArticle() {
