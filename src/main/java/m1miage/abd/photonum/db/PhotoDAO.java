@@ -26,6 +26,9 @@ public class PhotoDAO {
 			preparedStatement.setInt(4, photo.getAlbum().getIdAlbum());
 			preparedStatement.setInt(5, photo.getFichier().getIdFichier());
 			preparedStatement.executeUpdate();
+			majID(photo);
+			System.out.println("La photo: " + photo.getTitre()
+					+ " a bien été ajouté");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -33,10 +36,12 @@ public class PhotoDAO {
 
 	public void deletePhoto(int photoId) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("delete from PHOTO where IDPHOTO=" + photoId);
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from PHOTO where IDPHOTO=?");
 			// Parameters start with 1
 			preparedStatement.setInt(1, photoId);
 			preparedStatement.executeUpdate();
+			this.connection.commit();
+			System.out.println("La photo: " + photoId + " a bien été supprimé");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +55,11 @@ public class PhotoDAO {
 			preparedStatement.setString(3, photo.getCommentaire());
 			preparedStatement.setInt(4, photo.getFichier().getIdFichier());
 			preparedStatement.setInt(5, photo.getPage());
+			preparedStatement.setInt(6, photo.getIdPhoto());
 			preparedStatement.executeUpdate();
+			this.connection.commit();
+			System.out.println("La photo: " + photo.getIdPhoto()
+					+ " a bien été modifié");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

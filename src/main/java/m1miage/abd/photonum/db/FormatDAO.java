@@ -28,6 +28,9 @@ public class FormatDAO {
 	            preparedStatement.setFloat(4, format.getVitesseImpression());	            
 	            preparedStatement.setInt(5, format.getStockPapier());
 	            preparedStatement.executeUpdate();
+	            majID(format);
+				System.out.println("Le format: " + format.getLibelle()
+						+ " a bien été ajouté");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -37,10 +40,12 @@ public class FormatDAO {
 
 	    public void deleteFormat (int formatId) {
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("delete from FORMAT where IDFORMAT="+formatId);
+	            PreparedStatement preparedStatement = connection.prepareStatement("delete from FORMAT where IDFORMAT=?");
 	            // Parameters start with 1
 	            preparedStatement.setInt(1, formatId);
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("Le format: " + formatId + " a bien été supprimé");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -56,7 +61,11 @@ public class FormatDAO {
 	            preparedStatement.setString(3, format.getResolutionMinimale());	            
 	            preparedStatement.setFloat(4, format.getVitesseImpression());	            
 	            preparedStatement.setInt(5, format.getStockPapier());
+	            preparedStatement.setInt(6, format.getIdFormat());
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("Le format: " + format.getIdFormat()
+						+ " a bien été modifié");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }

@@ -26,6 +26,9 @@ public class LivraisonDAO {
 	            preparedStatement.setDate(2, new java.sql.Date(livraison.getDate().getTime()));
 	            preparedStatement.setString(3, livraison.getStatus() );
 	            preparedStatement.executeUpdate();
+	            majID(livraison);
+				System.out.println("La livraison de l'article: " + livraison.getArticle().getIdArticle()
+						+ " a bien été ajouté");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -39,6 +42,8 @@ public class LivraisonDAO {
 	            // Parameters start with 1
 	            preparedStatement.setInt(1, livraisonId);
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("La livraison: " + livraisonId + " a bien été supprimé");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -52,7 +57,11 @@ public class LivraisonDAO {
 	            preparedStatement.setInt(1, livraison.getArticle().getIdArticle());
 	            preparedStatement.setDate(2, new java.sql.Date(livraison.getDate().getTime()));
 	            preparedStatement.setString(3, livraison.getStatus() );
+	            preparedStatement.setInt(4, livraison.getIdLivraison());
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("La livraison: " + livraison.getIdLivraison()
+						+ " a bien été modifié");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
