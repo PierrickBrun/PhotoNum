@@ -64,4 +64,10 @@ public class Photo {
 		this.idPhoto = idPhoto;
 	}
 
+	@Override
+	public String toString() {
+		return "Photo [idPhoto=" + idPhoto + ", album=" + album + ", fichier=" + fichier + ", titre=" + titre
+				+ ", commentaire=" + commentaire + ", page=" + page + "]";
+	}
+
 }

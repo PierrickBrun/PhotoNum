@@ -65,4 +65,12 @@ public class Fichier {
 		this.client = client;
 	}
 
+	@Override
+	public String toString() {
+		return "Fichier [idFichier=" + idFichier + ", chemin=" + chemin + ", partage=" + partage + ", priseDeVue="
+				+ priseDeVue + ", resolution=" + resolution + ", client=" + client + "]";
+	}
+	
+	
+
 }

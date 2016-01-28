@@ -50,5 +50,11 @@ public class Prestataire {
 		this.activite = activite;
 	}
 
+	@Override
+	public String toString() {
+		return "Prestataire [IdPrestataire=" + IdPrestataire + ", nom=" + nom + ", adresse=" + adresse + ", telephone="
+				+ telephone + ", activite=" + activite + "]";
+	}
+
 	
 }

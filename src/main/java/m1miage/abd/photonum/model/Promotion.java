@@ -31,4 +31,9 @@ public class Promotion {
 	public void setCommande(Commande commande){
 		this.commande = commande;
 	}
+
+	@Override
+	public String toString() {
+		return "Promotion [IdPromotion=" + IdPromotion + ", commande=" + commande + ", montant=" + montant + "]";
+	}
 }
