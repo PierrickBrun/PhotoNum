@@ -206,8 +206,10 @@ public class Manager {
 		menu.addItem("Voir les commandes");
 		menu.addItem("Voir les albums");
 		menu.addItem("Supprimer le client");
+		int selectedItem = menu.launch();
+		System.out.println(selectedItem);
 		
-		switch (menu.launch()) {
+		switch (selectedItem) {
 		case 1:
 			System.out.println("Veuillez entrer le nouveau prénom: ");
 			selectedClient.setPrenom(scan.nextLine());
@@ -218,17 +220,22 @@ public class Manager {
 			clientDAO.updateUser(selectedClient);
 			break;
 		case 3:
+			System.out.println("Veuillez entrer le nouveau nom: ");
+			selectedClient.setNom(scan.nextLine());
+			clientDAO.updateUser(selectedClient);
+			break;
+		case 4:
 			System.out.println("Veuillez entrer le nouveau mot de passe: ");
 			selectedClient.setAdresse(scan.nextLine());
 			clientDAO.updateUser(selectedClient);
 			break;
-		case 4:
+		case 5:
 			commandesMenu(selectedClient);
 			break;
-		case 5:
+		case 6:
 			albumsMenu(selectedClient);
 			break;
-		case 6:
+		case 7:
 			System.out.println("Désactivation du client");
 			clientDAO.deleteUser(selectedClient.getIdClient());
 			break;

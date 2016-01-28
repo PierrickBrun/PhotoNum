@@ -46,7 +46,7 @@ public class ClientDAO {
 
 	public void deleteUser(int clientId) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET ACTIF = ? ");
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE CLIENT SET ACTIF = 0 WHERE IDCLIENT = ?");
 			preparedStatement.setInt(1, clientId);
 			preparedStatement.executeUpdate();
 			this.connection.commit();
