@@ -25,7 +25,7 @@ public class ClientDAO {
 			stmt1.execute(lock);
 
 			PreparedStatement preparedStatement = connection.prepareStatement(
-					"insert into Client(NOM,PRENOM,MAIL,ADRESSE,MOT_DE_PASSE, ACTIF ) values (?, ?, ?, ?, ? )");
+					"insert into Client(NOM,PRENOM,MAIL,ADRESSE,MOT_DE_PASSE, ACTIF ) values (?, ?, ?, ?, ?, ? )");
 
 			// Parameters start with 1
 
