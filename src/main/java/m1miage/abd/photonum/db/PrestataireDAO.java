@@ -19,7 +19,7 @@ public class PrestataireDAO {
 	 
 	 public void addPrestataire(Prestataire prestataire) {
 		 try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("insert into PRESTATAIRE (NOM, ADRESSE, TELEPHONE, ACTIVITE) values (?, ?, ?, ?, ? )");
+	            PreparedStatement preparedStatement = connection.prepareStatement("insert into PRESTATAIRE (NOM, ADRESSE, TELEPHONE, ACTIVITE) values (?, ?, ?, ?)");
 	            preparedStatement.setString(1, prestataire.getNom());
 	            preparedStatement.setString(2, prestataire.getAdresse());
 	            preparedStatement.setString(3, prestataire.getTelephone());	            
