@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import m1miage.abd.photonum.model.Album;
+import m1miage.abd.photonum.model.Client;
 
 public class AlbumDAO {
 
@@ -65,7 +66,28 @@ public class AlbumDAO {
 	        }
 	    }
 
-
+	    public void majID(Album album){
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from ALBUM where IDCLIENT=? AND TITRE=?");
+	            preparedStatement.setInt(1, album.getClient().getIdClient());
+	            preparedStatement.setString(2, album.getTitre());
+	            ResultSet rs = preparedStatement.executeQuery();
+	            ClientDAO clientDAO= new ClientDAO(connection);
+	            if (rs.next()) {	
+	            	album.setIdAlbum(rs.getInt("IDALBUM"));
+	            	album.setClient(clientDAO.getUserById(rs.getInt("IDCLIENT")));
+	            	album.setTitre(rs.getString("TITRE"));
+	            	album.setPreface(rs.getString("PREFACE"));
+	            	album.setPostface(rs.getString("POSTFACE"));
+	                album.setNbPage(rs.getInt("NBPAGE"));
+	                album.affecterType(rs.getString("TYPE"));
+		            this.connection.commit();
+		            System.out.println("Idalbum mis à jour pour Titre:"+album.getTitre()+"et IdClient:"+album.getClient().getIdClient() +". Son id est: "+album.getIdAlbum());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 
 	    public List<Album> getAllAlbum() {
