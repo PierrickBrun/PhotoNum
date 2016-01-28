@@ -10,8 +10,6 @@ import java.util.List;
 
 import m1miage.abd.photonum.model.Client;
 
-import  util.DatabaseAccessProperties;
-
 
 public class ClientDAO {
 

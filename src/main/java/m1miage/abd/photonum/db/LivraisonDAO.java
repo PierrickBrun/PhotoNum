@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import m1miage.abd.photonum.model.Format;
 import m1miage.abd.photonum.model.Livraison;
 
 public class LivraisonDAO {
@@ -58,7 +59,25 @@ public class LivraisonDAO {
 	        }
 	    }
 
-
+	    public void majID(Livraison livraison){
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from LIVRAISON where IDARTICLE=? AND DATELIVRAISON=?");
+	            preparedStatement.setInt(1, livraison.getArticle().getIdArticle());
+	            preparedStatement.setDate(2, new java.sql.Date(livraison.getDate().getTime()));
+	            ResultSet rs = preparedStatement.executeQuery();
+	            ArticleDAO articleDAO = new ArticleDAO(connection);
+	            if (rs.next()) {	
+	            	livraison.setIdLivraison(rs.getInt("IDLIVRAISON"));
+	            	livraison.setArticle(articleDAO.getArticleById(rs.getInt("IDARTICLE")));
+	            	livraison.setDate(rs.getDate("DATELIVRAISON"));
+	            	livraison.setStatus(rs.getString("STATUT"));
+		            this.connection.commit();
+		            System.out.println("Idlivraison mis à jour pour IDARTICLE:"+livraison.getArticle().getIdArticle()+"et DATELIVRAISON:"+livraison.getDate()+". Son id est: "+livraison.getIdLivraison());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 
 	    public List<Livraison> getAllLivraison() {

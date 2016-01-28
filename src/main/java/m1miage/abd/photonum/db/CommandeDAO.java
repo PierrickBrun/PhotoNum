@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import m1miage.abd.photonum.model.Client;
 import m1miage.abd.photonum.model.Commande;
 
 public class CommandeDAO {
@@ -32,11 +33,28 @@ public class CommandeDAO {
 	            preparedStatement.setFloat(4, commande.getPrixTotal());	            
 	            preparedStatement.setString(5, commande.getStatut());
 	            preparedStatement.executeUpdate();
+	            majID(commande);
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
-
+	 
+	 public void majID(Commande cmd){
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from Commande where DATECOMMANDE=?, IDCLIENT=?");
+	            preparedStatement.setDate(1, new java.sql.Date(cmd.getDate().getTime()));
+	            preparedStatement.setInt(2, cmd.getClient().getIdClient() );
+	            ResultSet rs = preparedStatement.executeQuery();
+	            if (rs.next()) {	
+	            	 cmd.setIdCommande(rs.getInt("IDCOMMANDE"));
+		             
+		             this.connection.commit();
+		             System.out.println("Id Commande mis à jour id: "+cmd.getIdCommande());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 
 	    public void deleteCommande (int commandeId) {

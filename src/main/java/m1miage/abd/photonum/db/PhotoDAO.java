@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import m1miage.abd.photonum.model.Livraison;
 import m1miage.abd.photonum.model.Photo;
 
 public class PhotoDAO {
@@ -55,17 +56,45 @@ public class PhotoDAO {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void majID(Photo photo){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from PHOTO where IDALBUM=? AND IDFICHIER=? AND PAGE=?");
+            preparedStatement.setInt(1, photo.getAlbum().getIdAlbum());
+			preparedStatement.setInt(2, photo.getFichier().getIdFichier());
+			preparedStatement.setInt(3, photo.getPage());
+            ResultSet rs = preparedStatement.executeQuery();
+            AlbumDAO albumDAO=new AlbumDAO(connection);
+			FichierDAO fichierDAO=new FichierDAO(connection);
+			if (rs.next()) {	
+            	photo.setIdPhoto(rs.getInt("IDPHOTO"));
+				photo.setAlbum(albumDAO.getAlbumById(rs.getInt("IDALBUM")));
+				photo.setTitre(rs.getString("TITRE"));
+				photo.setCommentaire(rs.getString("COMMENTAIRE"));
+				photo.setFichier(fichierDAO.getFichierById(rs.getInt("IDFICHIER")));				
+				photo.setPage(rs.getInt("PAGE"));
+	            this.connection.commit();
+	            System.out.println("Idphoto mis à jour pour IDALBUM:"+photo.getAlbum().getIdAlbum()+"et IDFICHIER:"+photo.getFichier().getIdFichier()+"et PAGE:"+photo.getPage()+". Son id est: "+photo.getIdPhoto());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	public List<Photo> getAllPhoto() {
 		List<Photo> photos = new ArrayList<Photo>();
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("select * from PHOTO");
+			AlbumDAO albumDAO=new AlbumDAO(connection);
+			FichierDAO fichierDAO=new FichierDAO(connection);
 			while (rs.next()) {
 				Photo photo = new Photo();
 				photo.setIdPhoto(rs.getInt("IDPHOTO"));
+				photo.setAlbum(albumDAO.getAlbumById(rs.getInt("IDALBUM")));
 				photo.setTitre(rs.getString("TITRE"));
 				photo.setCommentaire(rs.getString("COMMENTAIRE"));
+				photo.setFichier(fichierDAO.getFichierById(rs.getInt("IDFICHIER")));				
 				photo.setPage(rs.getInt("PAGE"));
 				photos.add(photo);
 			}
@@ -82,9 +111,13 @@ public class PhotoDAO {
 					.prepareStatement("select * from PHOTO where IDPHOTO=" + photoId);
 			// preparedStatement.setInt(1, userId);
 			ResultSet rs = preparedStatement.executeQuery();
+			AlbumDAO albumDAO=new AlbumDAO(connection);
+			FichierDAO fichierDAO=new FichierDAO(connection);
 			if (rs.next()) {
+				photo.setAlbum(albumDAO.getAlbumById(rs.getInt("IDALBUM")));
 				photo.setTitre(rs.getString("TITRE"));
 				photo.setCommentaire(rs.getString("COMMENTAIRE"));
+				photo.setFichier(fichierDAO.getFichierById(rs.getInt("IDFICHIER")));
 				photo.setPage(rs.getInt("PAGE"));
 			}
 		} catch (SQLException e) {

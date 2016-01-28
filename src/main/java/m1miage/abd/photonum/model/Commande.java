@@ -1,7 +1,9 @@
 package m1miage.abd.photonum.model;
 
+
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class Commande {
 
@@ -73,6 +75,18 @@ public class Commande {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public Date getDate() {
+		// TODO Auto-generated method stub
+		return this.dateCommande;
+	}
+
+	@Override
+	public String toString() {
+		return "Commande [idCommande=" + idCommande + ", dateCommande=" + dateCommande + ", promotion=" + promotion
+				+ ", prixTotal=" + prixTotal + ", statut=" + statut + ", articles=" + articles + ", client=" + client
+				+ "]";
 	}
 
 

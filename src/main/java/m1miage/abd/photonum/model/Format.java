@@ -66,5 +66,14 @@ public class Format {
 	public void setStockPapier(int stockPapier) {
 		this.stockPapier = stockPapier;
 	}
+
+	@Override
+	public String toString() {
+		return "Format [idFormat=" + idFormat + ", libelle=" + libelle + ", prixUnitaire=" + prixUnitaire
+				+ ", resolutionMinimale=" + resolutionMinimale + ", vitesseImpression=" + vitesseImpression
+				+ ", stockPapier=" + stockPapier + "]";
+	}
+	
+	
 	
 }

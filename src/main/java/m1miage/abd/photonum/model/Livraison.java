@@ -58,5 +58,11 @@ public class Livraison {
 		this.article = article;
 	}
 
+	@Override
+	public String toString() {
+		return "Livraison [idLivraison=" + idLivraison + ", commande=" + commande + ", date=" + date + ", status="
+				+ status + ", article=" + article + "]";
+	}
+
 
 }

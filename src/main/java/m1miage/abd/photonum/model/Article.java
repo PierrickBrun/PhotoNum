@@ -77,4 +77,12 @@ public class Article {
 		this.prix = prix;
 	}
 
+	@Override
+	public String toString() {
+		return "Article [idArticle=" + idArticle + ", commande=" + commande + ", album=" + album + ", format=" + format
+				+ ", prestataire=" + prestataire + ", quantite=" + quantite + ", prix=" + prix + "]";
+	}
+	
+	
+
 }
