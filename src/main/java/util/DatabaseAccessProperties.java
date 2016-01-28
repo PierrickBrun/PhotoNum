@@ -21,7 +21,7 @@ public class DatabaseAccessProperties {
 	private Properties prop = new Properties();
 	private String jdbcDriver;
 	private String dbUrl;
-	private String username, password, sshHost, sshUser, sshPass;
+	private String username, password, sshHost, sshUser, sshPass, sshTunnelPort;
 
 	public DatabaseAccessProperties(String propertiesFile) {
 		try {
@@ -48,6 +48,7 @@ public class DatabaseAccessProperties {
 		sshHost = prop.getProperty("ssh.host");
 		sshUser = prop.getProperty("ssh.username");
 		sshPass = prop.getProperty("ssh.password");
+		sshTunnelPort = prop.getProperty("ssh.tunnelPort");
 	}
 	public boolean promptForCredentials(){
 		if(prop.getProperty("ssh.password.prompt").equals("true")){
@@ -77,20 +78,36 @@ public class DatabaseAccessProperties {
 	public String getSSHPassword() {
 		return sshPass;
 	}
+
+	public Integer getLocalPort() {
+		return Integer.valueOf(sshTunnelPort);
+	}
+	
 	public String[] getCredentials(){
 		String username = null;
 		String password = null;
+		String port = null;
 		JPanel panel = new JPanel();
 		JLabel labelUsername = new JLabel("Username:");
 		JTextField sshUsername = new JTextField(10);
 		sshUsername.setText(sshUser);
+		
 		JLabel labelPassword = new JLabel("Password:");
 		JPasswordField sshPass = new JPasswordField(10);
+
+		JLabel labelPort = new JLabel("Tunnel port:");
+		JTextField sshTunnelPortField = new JTextField(10);
+		sshTunnelPortField.setText(sshTunnelPort);
+		
 		panel.add(labelUsername);
 		panel.add(sshUsername);
-
+		
 		panel.add(labelPassword);
 		panel.add(sshPass);
+		
+		panel.add(labelPort);
+		panel.add(sshTunnelPortField);
+		
 		String[] options = new String[]{"OK"};
 		int option = JOptionPane.showOptionDialog(null, panel, "Enter your SSH credentials:",
 				JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -99,9 +116,10 @@ public class DatabaseAccessProperties {
 		{
 			username = sshUsername.getText().trim();
 			password = new String(sshPass.getPassword());
+			port = sshTunnelPortField.getText().trim();
 		}
 
-		return new String[]{username,password};
+		return new String[]{username,password,port};
 
 	}
 	public boolean useTunneling() {
@@ -110,8 +128,5 @@ public class DatabaseAccessProperties {
 		}else{
 			return false;
 		}
-	}
-	public Integer getLocalPort() {
-		return Integer.valueOf(prop.getProperty("ssh.tunnelPort"));
 	}
 }

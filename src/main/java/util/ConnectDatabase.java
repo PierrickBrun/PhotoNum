@@ -31,8 +31,8 @@ public class ConnectDatabase {
 					java.util.Properties config = new java.util.Properties(); 
 					config.put("StrictHostKeyChecking", "no");
 					JSch jsch = new JSch();
+					String[] creds = dap.getCredentials();
 					if(dap.promptForCredentials()){
-						String[] creds = dap.getCredentials();
 						session=jsch.getSession(creds[0], dap.getSSHHost(), 22);
 						session.setPassword(creds[1]);
 					}else{
@@ -42,7 +42,7 @@ public class ConnectDatabase {
 					session.setConfig(config);
 					session.connect();
 					System.out.println("SSH Tunnel connected");
-					session.setPortForwardingL(dap.getLocalPort(), dap.getSSHHost(), 1521);
+					session.setPortForwardingL(Integer.parseInt(creds[2]), dap.getSSHHost(), 1521);
 					System.out.println("Port Forwarded");
 				}
 
