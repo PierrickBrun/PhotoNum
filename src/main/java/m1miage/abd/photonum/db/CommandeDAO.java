@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import m1miage.abd.photonum.model.Client;
 import m1miage.abd.photonum.model.Commande;
 
 public class CommandeDAO {
@@ -36,7 +37,30 @@ public class CommandeDAO {
 	            e.printStackTrace();
 	        }
 	    }
-
+	 
+	 public void majID(Commande cmd){
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from Commande where dbms_lob.compare(MAIL, ?)= 0");
+	            preparedStatement.setDate(1, new java.sql.Date(cmd.getDate().getTime()));/*
+	            preparedStatement.setString(2, user.getPrenom());
+	            preparedStatement.setString(3, user.getMail());
+	            preparedStatement.setString(4, user.getAdresse());
+	            preparedStatement.setString(5, user.getMdp());*/
+	            ResultSet rs = preparedStatement.executeQuery();
+	            if (rs.next()) {	
+	            	 user.setIdClient(rs.getInt("IDCLIENT"));
+		             user.setNom(rs.getString("NOM"));
+		             user.setPrenom(rs.getString("PRENOM"));
+		             user.setMail(rs.getString("MAIL"));
+		             user.setAdresse(rs.getString("ADRESSE"));
+		             user.setMdp(rs.getString("MOT_DE_PASSE"));
+		             this.connection.commit();
+		             System.out.println("Id client mis à jour :"+user.getNom()+" id: "+user.getIdClient());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 
 	    public void deleteCommande (int commandeId) {
