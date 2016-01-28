@@ -34,7 +34,7 @@ public class PrestataireDAO {
 
 	    public void deletePrestataire (int prestataireId) {
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("delete from PRESTATAIRE where IDPRESTATAIRE="+prestataireId);
+	            PreparedStatement preparedStatement = connection.prepareStatement("delete from PRESTATAIRE where IDPRESTATAIRE=?");
 	            preparedStatement.setInt(1, prestataireId);
 	            preparedStatement.executeUpdate();
 	        } catch (SQLException e) {

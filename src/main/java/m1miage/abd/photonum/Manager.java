@@ -114,12 +114,13 @@ public class Manager {
 	private static void prestatairesMenu() {
 		PrintableMenu menu = new PrintableMenu("Menu prestataires");
 		PrestataireDAO prestataireDAO = new PrestataireDAO(db);
-		for (Prestataire prestataire : prestataireDAO.getAllPrestataire()) {
+		List<Prestataire> prestataires = prestataireDAO.getAllPrestataire();
+		for (Prestataire prestataire : prestataires) {
 			menu.addItem(prestataire.getNom()+"("+prestataire.getIdPrestataire()+")");
 		}
 		menu.addItem("Nouveau prestataire");
-		
 		int selectedItem = menu.launch();
+		
 		
 		if(menu.isLastItem(selectedItem)){
 			Prestataire prestataire = new Prestataire();
@@ -134,6 +135,50 @@ public class Manager {
 			
 			PrestataireDAO prestatairePresistant = new PrestataireDAO(db);
 			prestatairePresistant.addPrestataire(prestataire);
+			prestatairesMenu();
+		}else{
+			Prestataire prestataire = prestataires.get(selectedItem-1);
+			System.out.println(prestataire);
+			prestataireMenu(prestataire, prestataireDAO);
+		}
+	}
+	
+	private static void prestataireMenu(Prestataire prestataire, PrestataireDAO prestataireDAO) {
+		PrintableMenu menu = new PrintableMenu("Prestataire: "+prestataire.getIdPrestataire(), "Séléctionnez une entrée pour la modifier");
+		menu.addItem("Nom: "+prestataire.getNom());
+		menu.addItem("Adresse: "+prestataire.getAdresse());
+		menu.addItem("Tirage: "+prestataire.getActivite());
+		menu.addItem("Téléphone: "+prestataire.getTelephone());
+		menu.addItem("Supprimmer ce prestataire");
+		switch (menu.launch()) {
+		case 1:
+			System.out.println("Entrez le nouveau nom de votre prestataire");
+			prestataire.setNom(scan.nextLine());
+			prestataireMenu(prestataire, prestataireDAO);
+			break;
+		case 2:
+			System.out.println("Entrez la nouvelle adresse de votre prestataire");
+			prestataire.setAdresse(scan.nextLine());
+			prestataireMenu(prestataire, prestataireDAO);
+			break;
+		case 3:
+			System.out.println("Entrez les nouvelles informations de tirage de votre prestataire");
+			prestataire.setActivite(scan.nextLine());
+			prestataireMenu(prestataire, prestataireDAO);
+			break;
+		case 4:
+			System.out.println("Entrez le nouveau téléphone de votre prestataire");
+			prestataire.setTelephone(scan.nextLine());
+			prestataireMenu(prestataire, prestataireDAO);
+			break;
+		case 5:
+			System.out.println("Suppression du prestataire");
+			prestataireDAO.deletePrestataire(prestataire.getIdPrestataire());
+			prestatairesMenu();
+			break;
+
+		default:
+			break;
 		}
 	}
 
