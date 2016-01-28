@@ -14,11 +14,12 @@ public class Album {
 		Album,Agenda52s,Agenda365j,CalendrierMural,CalendrierBureau,Livre;
 	}
 
-	/*private static final String tAlbum = "ALBUM";
-	private static final String tAgenda52s = "AGENDA52S";
-	private static final String tAgenda365j = "AGENDA365J";
-	private static final String tCalendrierMural = "CALENDRIERMURAL";
-	private static final String tCalendrierBureau = "CALENDRIERBUREAU";*/
+	public static final String tBasicAlbum = "Album";
+	public static final String tAgenda52s = "Agenda52s";
+	public static final String tAgenda365j = "Agenda365j";
+	public static final String tCalendrierMural = "CalendrierMural";
+	public static final String tCalendrierBureau = "CalendrierBureau";
+	public static final String tLivre = "Livre";
 
 	public Album() {
 	}
@@ -45,19 +46,19 @@ public class Album {
 	public void affecterType(String type){
 		switch (type)
 		{
-		  case "Agenda52s":
+		  case tAgenda52s:
 		    this.tAlbum = Talbum.Agenda52s;
 		    break;
-		  case "Agenda365j":
+		  case tAgenda365j:
 			  this.tAlbum = Talbum.Agenda365j;
 		    break;
-		  case "CalendrierBureau":
+		  case tCalendrierBureau:
 			  this.tAlbum = Talbum.CalendrierBureau;
 		    break;
-		  case "CalendrierMural":
+		  case tCalendrierMural:
 			  this.tAlbum = Talbum.CalendrierMural;
 		    break;
-		  case "Livre":
+		  case tLivre:
 			    this.tAlbum = Talbum.Livre;
 			    break;
 		  default:

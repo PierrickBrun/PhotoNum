@@ -44,7 +44,7 @@ public class ClientDAO {
 
 	    public void deleteUser(int clientId) {
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("delete from users where userid=?");
+	            PreparedStatement preparedStatement = connection.prepareStatement("delete from CLIENT where IDCLIENT=?");
 	            // Parameters start with 1
 	            preparedStatement.setInt(1, clientId);
 	            preparedStatement.executeUpdate();
