@@ -184,13 +184,20 @@ public class Manager {
 
 	private static void utilisateursMenu() {
 		PrintableMenu menu = new PrintableMenu("Menu clients", "Séléctionnez un utilisateur");
-		ClientDAO commandeDAO = new ClientDAO(db);
-		List<Client> clientList = commandeDAO.getAllUsers();
+		ClientDAO clientDAO = new ClientDAO(db);
+		List<Client> clientList = clientDAO.getAllUsers();
 		for (Client client : clientList) {
 			menu.addItem(client.getNom()+" "+client.getPrenom()+" ("+client.getIdClient()+")");
 		}
+		
 		Client selectedClient = clientList.get(menu.launch());
-		menu = new PrintableMenu("Utilisateur sélectionné: "+selectedClient.getNom()+" "+selectedClient.getPrenom()+"\n"
+		utilisateurMenu(selectedClient, clientDAO);
+		
+		
+	}
+
+	private static void utilisateurMenu(Client selectedClient, ClientDAO clientDAO) {
+		PrintableMenu menu = new PrintableMenu("Utilisateur sélectionné: "+selectedClient.getNom()+" "+selectedClient.getPrenom()+"\n"
 				+ "id: "+selectedClient.getIdClient()+"|"+selectedClient.getMail()+"|"+selectedClient.getAdresse());
 		menu.addItem("Modifier prénom");
 		menu.addItem("Modifier nom");
@@ -198,6 +205,48 @@ public class Manager {
 		menu.addItem("Modifier mot de passe");
 		menu.addItem("Voir les commandes");
 		menu.addItem("Voir les albums");
+		menu.addItem("Supprimer le client");
+		
+		switch (menu.launch()) {
+		case 1:
+			System.out.println("Veuillez entrer le nouveau prénom: ");
+			selectedClient.setPrenom(scan.nextLine());
+			clientDAO.updateUser(selectedClient);
+		case 2:
+			System.out.println("Veuillez entrer le nouveau nom: ");
+			selectedClient.setNom(scan.nextLine());
+			clientDAO.updateUser(selectedClient);
+			break;
+		case 3:
+			System.out.println("Veuillez entrer le nouveau mot de passe: ");
+			selectedClient.setAdresse(scan.nextLine());
+			clientDAO.updateUser(selectedClient);
+			break;
+		case 4:
+			commandesMenu(selectedClient);
+			break;
+		case 5:
+			albumsMenu(selectedClient);
+			break;
+		case 6:
+			System.out.println("Désactivation du client");
+			clientDAO.deleteUser(selectedClient.getIdClient());
+			break;
+
+
+		default:
+			break;
+		}
+	}
+
+	private static void albumsMenu(Client selectedClient) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void commandesMenu(Client selectedClient) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static boolean connect(String emailAdress, String password){
