@@ -10,9 +10,10 @@ public class Client {
 	private String mdp;
 	private int statut;
 
-	public Client(){}
-	
-	public Client(String nom, String prenom, String mail, String adresse, String mdp, int statut ) {
+	public Client() {
+	}
+
+	public Client(String nom, String prenom, String mail, String adresse, String mdp, int statut) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
@@ -75,6 +76,15 @@ public class Client {
 
 	public void setStatut(int statut) {
 		this.statut = statut;
+	}
+
+	public boolean isActive() {
+		if (statut == 1) {
+			return true;
+		} else if (statut == 0) {
+			return false;
+		}
+		return false;
 	}
 
 	@Override
