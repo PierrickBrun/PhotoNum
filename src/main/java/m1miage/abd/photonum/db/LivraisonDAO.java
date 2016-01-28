@@ -35,7 +35,7 @@ public class LivraisonDAO {
 
 	    public void deleteLivraison (int livraisonId) {
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("delete from LIVRAISON where IDLIVRAISON="+livraisonId);
+	            PreparedStatement preparedStatement = connection.prepareStatement("delete from LIVRAISON where IDLIVRAISON=?");
 	            // Parameters start with 1
 	            preparedStatement.setInt(1, livraisonId);
 	            preparedStatement.executeUpdate();
