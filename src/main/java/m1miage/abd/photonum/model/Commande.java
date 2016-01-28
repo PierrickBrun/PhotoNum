@@ -1,9 +1,7 @@
 package m1miage.abd.photonum.model;
 
-
 import java.util.ArrayList;
 import java.util.Date;
-
 
 public class Commande {
 
@@ -14,7 +12,7 @@ public class Commande {
 	private String statut;
 	private ArrayList<Article> articles;
 	private Client client;
-	
+
 	public Commande() {
 		this.dateCommande = new Date();
 		this.prixTotal = 0;
@@ -37,6 +35,7 @@ public class Commande {
 	public void setDateCommande(Date dateCommande) {
 		this.dateCommande = dateCommande;
 	}
+
 	public Promotion getPromotion() {
 		return promotion;
 	}
@@ -68,7 +67,15 @@ public class Commande {
 	public void setArticlesCmd(ArrayList<Article> articlesCmd) {
 		this.articles = articlesCmd;
 	}
-	
+
+	public void addArticle(Article article) {
+		articles.add(article);
+	}
+
+	public void removeArticle(Article article) {
+		articles.remove(article);
+	}
+
 	public Client getClient() {
 		return client;
 	}
@@ -88,6 +95,5 @@ public class Commande {
 				+ ", prixTotal=" + prixTotal + ", statut=" + statut + ", articles=" + articles + ", client=" + client
 				+ "]";
 	}
-
 
 }
