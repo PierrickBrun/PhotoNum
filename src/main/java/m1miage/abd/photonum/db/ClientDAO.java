@@ -25,7 +25,7 @@ public class ClientDAO {
 			stmt1.execute(lock);
 
 			PreparedStatement preparedStatement = connection.prepareStatement(
-					"insert into Client(NOM,PRENOM,MAIL,ADRESSE,MOT_DE_PASSE, STATUT ) values (?, ?, ?, ?, ? )");
+					"insert into Client(NOM,PRENOM,MAIL,ADRESSE,MOT_DE_PASSE, ACTIF ) values (?, ?, ?, ?, ?, ? )");
 
 			// Parameters start with 1
 
@@ -46,7 +46,7 @@ public class ClientDAO {
 
 	public void deleteUser(int clientId) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET STATUT = ? ");
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE CLIENT SET ACTIF = 0 WHERE IDCLIENT = ?");
 			preparedStatement.setInt(1, clientId);
 			preparedStatement.executeUpdate();
 			this.connection.commit();
@@ -87,7 +87,7 @@ public class ClientDAO {
 				user.setMail(rs.getString("MAIL"));
 				user.setAdresse(rs.getString("ADRESSE"));
 				user.setMdp(rs.getString("MOT_DE_PASSE"));
-				user.setStatut(rs.getInt("STATUT"));
+				user.setStatut(rs.getInt("ACTIF"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -107,7 +107,7 @@ public class ClientDAO {
 				user.setMail(rs.getString("MAIL"));
 				user.setAdresse(rs.getString("ADRESSE"));
 				user.setMdp(rs.getString("MOT_DE_PASSE"));
-				user.setStatut(rs.getInt("STATUT"));
+				user.setStatut(rs.getInt("ACTIF"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -129,7 +129,7 @@ public class ClientDAO {
 				user.setMail(rs.getString("MAIL"));
 				user.setAdresse(rs.getString("ADRESSE"));
 				user.setMdp(rs.getString("MOT_DE_PASSE"));
-				user.setStatut(rs.getInt("STATUT"));
+				user.setStatut(rs.getInt("ACTIF"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -152,7 +152,7 @@ public class ClientDAO {
 				user.setMail(rs.getString("MAIL"));
 				user.setAdresse(rs.getString("ADRESSE"));
 				user.setMdp(rs.getString("MOT_DE_PASSE"));
-				user.setStatut(rs.getInt("STATUT"));
+				user.setStatut(rs.getInt("ACTIF"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

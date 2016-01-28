@@ -19,7 +19,7 @@ public class LivraisonDAO {
 
 	 public void addLivraison(Livraison livraison) {
 		 try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("insert into LIVRAISON (IDARTICLE, DATELIVRAISON, STATUT) values (?, ?, ?, ?, ? )");
+	            PreparedStatement preparedStatement = connection.prepareStatement("insert into LIVRAISON (IDARTICLE, DATELIVRAISON, STATUT) values (?, ?, ? )");
 	            // Parameters start with 1
 	  // IDLIVRAISON
 	            preparedStatement.setInt(1, livraison.getArticle().getIdArticle());

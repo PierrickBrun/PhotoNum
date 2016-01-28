@@ -14,9 +14,11 @@ import org.omg.CORBA.Principal;
 
 import m1miage.abd.photonum.db.ClientDAO;
 import m1miage.abd.photonum.db.CommandeDAO;
+import m1miage.abd.photonum.db.PhotoDAO;
 import m1miage.abd.photonum.db.PrestataireDAO;
 import m1miage.abd.photonum.model.Client;
 import m1miage.abd.photonum.model.Commande;
+import m1miage.abd.photonum.model.Photo;
 import m1miage.abd.photonum.model.Prestataire;
 import util.ConnectDatabase;
 import util.PrintableMenu;
@@ -107,7 +109,15 @@ public class Manager {
 	}
 
 	private static void imagesMenu() {
-		// TODO Auto-generated method stub
+		List<Photo> photos = new PhotoDAO(db).getAllPhoto();
+		PrintableMenu menu = new PrintableMenu("Menu photos", "Séléctionnez une photo à supprimer");
+		for (Photo photo : photos) {
+			menu.addItem(photo.getTitre()+" ("+photo.getFichier().getChemin());
+		}
+		int selectedItem = menu.launch();
+		new PhotoDAO(db).deletePhoto(photos.get(selectedItem).getIdPhoto());
+		
+		mainMenu();
 		
 	}
 
@@ -206,8 +216,10 @@ public class Manager {
 		menu.addItem("Voir les commandes");
 		menu.addItem("Voir les albums");
 		menu.addItem("Supprimer le client");
+		int selectedItem = menu.launch();
+		System.out.println(selectedItem);
 		
-		switch (menu.launch()) {
+		switch (selectedItem) {
 		case 1:
 			System.out.println("Veuillez entrer le nouveau prénom: ");
 			selectedClient.setPrenom(scan.nextLine());
@@ -218,17 +230,22 @@ public class Manager {
 			clientDAO.updateUser(selectedClient);
 			break;
 		case 3:
+			System.out.println("Veuillez entrer le nouveau nom: ");
+			selectedClient.setNom(scan.nextLine());
+			clientDAO.updateUser(selectedClient);
+			break;
+		case 4:
 			System.out.println("Veuillez entrer le nouveau mot de passe: ");
 			selectedClient.setAdresse(scan.nextLine());
 			clientDAO.updateUser(selectedClient);
 			break;
-		case 4:
+		case 5:
 			commandesMenu(selectedClient);
 			break;
-		case 5:
+		case 6:
 			albumsMenu(selectedClient);
 			break;
-		case 6:
+		case 7:
 			System.out.println("Désactivation du client");
 			clientDAO.deleteUser(selectedClient.getIdClient());
 			break;
@@ -237,6 +254,7 @@ public class Manager {
 		default:
 			break;
 		}
+		mainMenu();
 	}
 
 	private static void albumsMenu(Client selectedClient) {

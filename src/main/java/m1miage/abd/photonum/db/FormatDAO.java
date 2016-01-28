@@ -73,7 +73,7 @@ public class FormatDAO {
 
 	    public void majID(Format format){
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("select * from FORMAT where LIBELLE=?");
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from FORMAT where dbms_lob.compare(LIBELLE, ?)= 0");
 	            preparedStatement.setString(1, format.getLibelle());
 	            ResultSet rs = preparedStatement.executeQuery();
 	            if (rs.next()) {	
