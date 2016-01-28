@@ -41,7 +41,7 @@ public class CommandeDAO {
 	 
 	 public void majID(Commande cmd){
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("select * from Commande where DATECOMMANDE=?, IDCLIENT=?");
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from Commande where DATECOMMANDE= TO_DATE(?,'YYYY-MM-DD') AND IDCLIENT=?");
 	            preparedStatement.setDate(1, new java.sql.Date(cmd.getDate().getTime()));
 	            preparedStatement.setInt(2, cmd.getClient().getIdClient() );
 	            ResultSet rs = preparedStatement.executeQuery();
