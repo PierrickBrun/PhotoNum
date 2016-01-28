@@ -14,9 +14,11 @@ import org.omg.CORBA.Principal;
 
 import m1miage.abd.photonum.db.ClientDAO;
 import m1miage.abd.photonum.db.CommandeDAO;
+import m1miage.abd.photonum.db.PhotoDAO;
 import m1miage.abd.photonum.db.PrestataireDAO;
 import m1miage.abd.photonum.model.Client;
 import m1miage.abd.photonum.model.Commande;
+import m1miage.abd.photonum.model.Photo;
 import m1miage.abd.photonum.model.Prestataire;
 import util.ConnectDatabase;
 import util.PrintableMenu;
@@ -107,7 +109,15 @@ public class Manager {
 	}
 
 	private static void imagesMenu() {
-		// TODO Auto-generated method stub
+		List<Photo> photos = new PhotoDAO(db).getAllPhoto();
+		PrintableMenu menu = new PrintableMenu("Menu photos", "Séléctionnez une photo à supprimer");
+		for (Photo photo : photos) {
+			menu.addItem(photo.getTitre()+" ("+photo.getFichier().getChemin());
+		}
+		int selectedItem = menu.launch();
+		new PhotoDAO(db).deletePhoto(photos.get(selectedItem).getIdPhoto());
+		
+		mainMenu();
 		
 	}
 
@@ -244,6 +254,7 @@ public class Manager {
 		default:
 			break;
 		}
+		mainMenu();
 	}
 
 	private static void albumsMenu(Client selectedClient) {
