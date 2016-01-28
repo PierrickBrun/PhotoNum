@@ -51,11 +51,19 @@ public class Photo {
 	public Album getAlbum() {
 		return album;
 	}
+	
+	public void setAlbum(Album album) {
+		this.album=album;
+	}
 
 	public Fichier getFichier() {
 		return fichier;
 	}
-
+	
+	public void setFichier(Fichier fichier) {
+		this.fichier=fichier;
+	}
+	
 	public int getIdPhoto() {
 		return idPhoto;
 	}

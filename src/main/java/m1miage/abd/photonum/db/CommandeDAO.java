@@ -33,6 +33,7 @@ public class CommandeDAO {
 	            preparedStatement.setFloat(4, commande.getPrixTotal());	            
 	            preparedStatement.setString(5, commande.getStatut());
 	            preparedStatement.executeUpdate();
+	            majID(commande);
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -40,22 +41,15 @@ public class CommandeDAO {
 	 
 	 public void majID(Commande cmd){
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("select * from Commande where dbms_lob.compare(MAIL, ?)= 0");
-	            preparedStatement.setDate(1, new java.sql.Date(cmd.getDate().getTime()));/*
-	            preparedStatement.setString(2, user.getPrenom());
-	            preparedStatement.setString(3, user.getMail());
-	            preparedStatement.setString(4, user.getAdresse());
-	            preparedStatement.setString(5, user.getMdp());*/
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from Commande where DATECOMMANDE=?, IDCLIENT=?");
+	            preparedStatement.setDate(1, new java.sql.Date(cmd.getDate().getTime()));
+	            preparedStatement.setInt(2, cmd.getClient().getIdClient() );
 	            ResultSet rs = preparedStatement.executeQuery();
 	            if (rs.next()) {	
-	            	 user.setIdClient(rs.getInt("IDCLIENT"));
-		             user.setNom(rs.getString("NOM"));
-		             user.setPrenom(rs.getString("PRENOM"));
-		             user.setMail(rs.getString("MAIL"));
-		             user.setAdresse(rs.getString("ADRESSE"));
-		             user.setMdp(rs.getString("MOT_DE_PASSE"));
+	            	 cmd.setIdCommande(rs.getInt("IDCOMMANDE"));
+		             
 		             this.connection.commit();
-		             System.out.println("Id client mis à jour :"+user.getNom()+" id: "+user.getIdClient());
+		             System.out.println("Id Commande mis à jour id: "+cmd.getIdCommande());
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();

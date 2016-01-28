@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import m1miage.abd.photonum.model.Article;
 import m1miage.abd.photonum.model.Format;
 
 public class FormatDAO {
@@ -62,8 +63,25 @@ public class FormatDAO {
 	        }
 	    }
 
-
-
+	    public void majID(Format format){
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from FORMAT where LIBELLE=?");
+	            preparedStatement.setString(1, format.getLibelle());
+	            ResultSet rs = preparedStatement.executeQuery();
+	            if (rs.next()) {	
+	            	format.setIdFormat(rs.getInt("IDFORMAT"));
+	            	format.setLibelle(rs.getString("LIBELLE"));
+	            	format.setPrixUnitaire(rs.getFloat("PRIXUNITAIRE"));
+	            	format.setResolutionMinimale(rs.getString("RESOLUTIONMINIMALE"));
+	            	format.setVitesseImpression(rs.getFloat("VITESSEIMPRESSION"));
+	                format.setStockPapier(rs.getInt("STOCKPAPIER"));
+		            this.connection.commit();
+		            System.out.println("Idformat mis à jour pour Libelle:"+format.getLibelle()+". Son id est: "+format.getIdFormat());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 	    public List<Format> getAllFormat() {
 	    	List<Format> formats = new ArrayList<Format>();
