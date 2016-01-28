@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import m1miage.abd.photonum.model.Article;
 import m1miage.abd.photonum.model.Fichier;
 
 public class FichierDAO {
@@ -58,7 +59,27 @@ public class FichierDAO {
 	        }
 	    }
 
-
+	    public void majID(Fichier fichier){
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from FICHIER where IDCLIENT=? AND CHEMIN=?");
+	            preparedStatement.setInt(1, fichier.getClient().getIdClient());
+	            preparedStatement.setString(2, fichier.getChemin());
+	            ResultSet rs = preparedStatement.executeQuery();
+	            ClientDAO clientDAO = new ClientDAO(connection);
+	            if (rs.next()) {	
+	            	fichier.setIdFichier(rs.getInt("IDFICHIER"));
+	            	fichier.setClient(clientDAO.getUserById(rs.getInt("IDCLIENT")));
+	            	fichier.setChemin(rs.getString("CHEMIN"));
+	            	fichier.setPartage(rs.getBoolean("PARTAGE"));
+	            	fichier.setPriseDeVue(rs.getString("PRISEDEVUE"));
+	                fichier.setResolution(rs.getString("RESOLUTION"));
+		            this.connection.commit();
+		            System.out.println("Idfichier mis à jour pour IDCLIENT:"+fichier.getClient().getIdClient()+"et CHEMIN:"+fichier.getChemin()+". Son id est: "+fichier.getIdFichier());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 
 	    public List<Fichier> getAllFichier() {
