@@ -25,7 +25,7 @@ public class ClientDAO {
 			stmt1.execute(lock);
 
 			PreparedStatement preparedStatement = connection.prepareStatement(
-					"insert into Client(NOM,PRENOM,MAIL,ADRESSE,MOT_DE_PASSE) values (?, ?, ?, ?, ? )");
+					"insert into Client(NOM,PRENOM,MAIL,ADRESSE,MOT_DE_PASSE, STATUT ) values (?, ?, ?, ?, ? )");
 
 			// Parameters start with 1
 
@@ -34,6 +34,7 @@ public class ClientDAO {
 			preparedStatement.setString(3, user.getMail());
 			preparedStatement.setString(4, user.getAdresse());
 			preparedStatement.setString(5, user.getMdp());
+			preparedStatement.setInt(6, user.getStatut());
 			preparedStatement.executeUpdate();
 			majID(user);
 			this.connection.commit();
@@ -45,8 +46,7 @@ public class ClientDAO {
 
 	public void deleteUser(int clientId) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("delete from CLIENT where IDCLIENT=?");
-			// Parameters start with 1
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USER SET STATUT = ? ");
 			preparedStatement.setInt(1, clientId);
 			preparedStatement.executeUpdate();
 			this.connection.commit();
@@ -87,6 +87,7 @@ public class ClientDAO {
 				user.setMail(rs.getString("MAIL"));
 				user.setAdresse(rs.getString("ADRESSE"));
 				user.setMdp(rs.getString("MOT_DE_PASSE"));
+				user.setStatut(rs.getInt("STATUT"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,6 +107,7 @@ public class ClientDAO {
 				user.setMail(rs.getString("MAIL"));
 				user.setAdresse(rs.getString("ADRESSE"));
 				user.setMdp(rs.getString("MOT_DE_PASSE"));
+				user.setStatut(rs.getInt("STATUT"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -127,6 +129,7 @@ public class ClientDAO {
 				user.setMail(rs.getString("MAIL"));
 				user.setAdresse(rs.getString("ADRESSE"));
 				user.setMdp(rs.getString("MOT_DE_PASSE"));
+				user.setStatut(rs.getInt("STATUT"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -149,6 +152,7 @@ public class ClientDAO {
 				user.setMail(rs.getString("MAIL"));
 				user.setAdresse(rs.getString("ADRESSE"));
 				user.setMdp(rs.getString("MOT_DE_PASSE"));
+				user.setStatut(rs.getInt("STATUT"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
