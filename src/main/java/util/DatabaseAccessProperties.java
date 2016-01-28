@@ -111,4 +111,7 @@ public class DatabaseAccessProperties {
 			return false;
 		}
 	}
+	public Integer getLocalPort() {
+		return Integer.valueOf(prop.getProperty("ssh.tunnelPort"));
+	}
 }

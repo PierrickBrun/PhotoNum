@@ -42,7 +42,7 @@ public class ConnectDatabase {
 					session.setConfig(config);
 					session.connect();
 					System.out.println("SSH Tunnel connected");
-					session.setPortForwardingL(1521, dap.getSSHHost(), 1521);
+					session.setPortForwardingL(dap.getLocalPort(), dap.getSSHHost(), 1521);
 					System.out.println("Port Forwarded");
 				}
 
