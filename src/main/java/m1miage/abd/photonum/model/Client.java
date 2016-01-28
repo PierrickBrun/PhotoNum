@@ -8,15 +8,17 @@ public class Client {
 	private String mail;
 	private String adresse;
 	private String mdp;
+	private int statut;
 
 	public Client(){}
 	
-	public Client(String nom, String prenom, String mail, String adresse, String mdp) {
+	public Client(String nom, String prenom, String mail, String adresse, String mdp, int statut ) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
 		this.adresse = adresse;
 		this.mdp = mdp;
+		this.statut = statut;
 	}
 
 	public int getIdClient() {
@@ -65,6 +67,14 @@ public class Client {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
+	}
+
+	public int getStatut() {
+		return statut;
+	}
+
+	public void setStatut(int statut) {
+		this.statut = statut;
 	}
 
 	@Override
