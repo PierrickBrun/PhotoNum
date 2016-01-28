@@ -34,6 +34,8 @@ public class CommandeDAO {
 	            preparedStatement.setString(5, commande.getStatut());
 	            preparedStatement.executeUpdate();
 	            majID(commande);
+				System.out.println("La commande du client: " + commande.getClient().getIdClient()
+						+ " a bien été ajouté");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -59,10 +61,12 @@ public class CommandeDAO {
 
 	    public void deleteCommande (int commandeId) {
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("delete from COMMANDE where IDCOMMANDE="+commandeId);
+	            PreparedStatement preparedStatement = connection.prepareStatement("delete from COMMANDE where IDCOMMANDE=?");
 	            // Parameters start with 1
 	            preparedStatement.setInt(1, commandeId);
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("La commande: " + commandeId + " a bien été supprimé");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -78,7 +82,11 @@ public class CommandeDAO {
 	            preparedStatement.setDate(3, new java.sql.Date(commande.getDateCommande().getTime()));	            
 	            preparedStatement.setFloat(4, commande.getPrixTotal());	            
 	            preparedStatement.setString(5, commande.getStatut());
+	            preparedStatement.setInt(7, commande.getIdCommande());
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("La commande: " + commande.getIdCommande()
+						+ " a bien été modifié");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
