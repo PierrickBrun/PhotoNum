@@ -56,8 +56,24 @@ public class PrestataireDAO {
 	        }
 	    }
 
-
-
+	    public void majID(Prestataire prestataire){
+	        try {
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from PRESTATAIRE where NOM=?");
+	            preparedStatement.setString(1, prestataire.getNom());
+	            ResultSet rs = preparedStatement.executeQuery();
+	            if (rs.next()) {	
+	            	prestataire.setIdPrestataire(rs.getInt("IDPRESTATAIRE"));
+	            	prestataire.setNom(rs.getString("NOM"));
+	            	prestataire.setAdresse(rs.getString("ADRESSE"));
+	            	prestataire.setTelephone(rs.getString("TELEPHONE"));
+	            	prestataire.setActivite(rs.getString("ACTIVITE"));
+		            this.connection.commit();
+		            System.out.println("Idprestataire mis à jour pour NOM:"+prestataire.getNom()+". Son id est: "+prestataire.getIdPrestataire());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 	    public List<Prestataire> getAllPrestataire() {
 	    	List<Prestataire> prestataires = new ArrayList<Prestataire>();

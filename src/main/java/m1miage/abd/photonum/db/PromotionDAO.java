@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+import m1miage.abd.photonum.model.Livraison;
 import m1miage.abd.photonum.model.Promotion;
 
 public class PromotionDAO {
@@ -21,8 +21,7 @@ public class PromotionDAO {
 	 public PromotionDAO(Connection conn) {
 		 this.connection = conn;
 	    }
-
-
+	 
 	    public List<Promotion> getAllPromotion() {
 	    	List<Promotion> promotions = new ArrayList<Promotion>();
 	        try {

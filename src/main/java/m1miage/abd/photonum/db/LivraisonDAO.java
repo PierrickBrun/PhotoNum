@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import m1miage.abd.photonum.model.Format;
 import m1miage.abd.photonum.model.Livraison;
 
 public class LivraisonDAO {
