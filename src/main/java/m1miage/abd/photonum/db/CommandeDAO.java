@@ -22,7 +22,6 @@ public class CommandeDAO {
 	 public void addCommande(Commande commande) {
 		 try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("insert into COMMANDE (IDPROMOTION, IDCLIENT, DATECOMMANDE, PRIXTOTAL, STATUT) values (?, ?, ?, ?, ? )");
-
 	            if(commande.getPromotion() == null){
 	            	preparedStatement.setNull(1,java.sql.Types.INTEGER);
 	            }else{	            	
@@ -103,10 +102,9 @@ public class CommandeDAO {
 	            ClientDAO clientDAO = new ClientDAO(connection);
 	            PromotionDAO promotionDAO = new PromotionDAO(connection);
 	            while (rs.next()) {
-	            	Commande commande = new Commande();
+	            	Commande commande = new Commande(clientDAO.getUserById(rs.getInt("IDCLIENT")));
 	            	commande.setIdCommande(rs.getInt("IDCOMMANDE"));
 	            	commande.setPromotion(promotionDAO.getPromotionById(rs.getInt("IDPROMOTION")));
-	            	commande.setClient(clientDAO.getUserById(rs.getInt("IDCLIENT")));
 	            	commande.setDateCommande(rs.getDate("DATECOMMANDE"));
 	            	commande.setPrixTotal(rs.getInt("PRIXTOTAL"));
 	                commande.setStatut(rs.getString("STATUT"));
@@ -119,16 +117,16 @@ public class CommandeDAO {
 	    }
 
 	    public Commande getCommandeById(int commandeId) {
-	        Commande commande = new Commande();
+	        Commande commande = null;
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("select * from COMMANDE where IDCOMMANDE="+commandeId);
 	            //preparedStatement.setInt(1, userId);
 	            ResultSet rs = preparedStatement.executeQuery();
 	            ClientDAO clientDAO = new ClientDAO(connection);
 	            PromotionDAO promotionDAO = new PromotionDAO(connection);
-	            if (rs.next()) {	            	
-	            	commande.setPromotion(promotionDAO.getPromotionById(rs.getInt("IDPROMOTION")));
-	            	commande.setClient(clientDAO.getUserById(rs.getInt("IDCLIENT")));
+	            if (rs.next()) {	
+	            	commande = new Commande(clientDAO.getUserById(rs.getInt("IDCLIENT")));
+	            	commande.setPromotion(promotionDAO.getPromotionById(rs.getInt("IDPROMOTION")));	            
 	            	commande.setDateCommande(rs.getDate("DATECOMMANDE"));
 	            	commande.setPrixTotal(rs.getInt("PRIXTOTAL"));
 	                commande.setStatut(rs.getString("STATUT"));
