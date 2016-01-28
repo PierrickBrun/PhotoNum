@@ -26,6 +26,9 @@ public class FichierDAO {
 	            preparedStatement.setString(4, fichier.getPriseDeVue());	            
 	            preparedStatement.setString(5, fichier.getResolution());
 	            preparedStatement.executeUpdate();
+	            majID(fichier);
+				System.out.println("Le fichier de chemin: " + fichier.getChemin()
+						+ " a bien été ajouté");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -35,9 +38,11 @@ public class FichierDAO {
 
 	    public void deleteFichier (int fichierId) {
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("delete from FICHIER where IDFICHIER="+fichierId);
+	            PreparedStatement preparedStatement = connection.prepareStatement("delete from FICHIER where IDFICHIER=?");
 	            preparedStatement.setInt(1, fichierId);
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("Le fichier: " + fichierId + " a bien été supprimé");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -52,7 +57,11 @@ public class FichierDAO {
 	            preparedStatement.setBoolean(3, fichier.isPartage());	            
 	            preparedStatement.setString(4, fichier.getPriseDeVue());	            
 	            preparedStatement.setString(5, fichier.getResolution());
+	            preparedStatement.setInt(6, fichier.getIdFichier());
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("Le fichier: " + fichier.getIdFichier()
+						+ " a bien été modifié");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }

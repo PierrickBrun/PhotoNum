@@ -36,6 +36,8 @@ public class ArticleDAO {
 			preparedStatement.setInt(5, article.getQuantite());
 			preparedStatement.setFloat(6, article.getPrix());
 			preparedStatement.executeUpdate();
+			majID(article);
+			System.out.println("L'Article a bien été ajouté à la commande: " + article.getCommande());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -48,6 +50,8 @@ public class ArticleDAO {
 			// Parameters start with 1
 			preparedStatement.setInt(1, articleId);
 			preparedStatement.executeUpdate();
+			this.connection.commit();
+			System.out.println("L'Article: " + articleId + " a bien été supprimé");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -65,7 +69,11 @@ public class ArticleDAO {
 			preparedStatement.setInt(4, article.getPrestataire().getIdPrestataire());
 			preparedStatement.setInt(5, article.getQuantite());
 			preparedStatement.setFloat(6, article.getPrix());
+			preparedStatement.setInt(7, article.getIdArticle());
 			preparedStatement.executeUpdate();
+			this.connection.commit();
+			System.out.println("L'Article: " + article.getIdArticle()
+					+ " a bien été modifié");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

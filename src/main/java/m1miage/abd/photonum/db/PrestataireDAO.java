@@ -25,6 +25,9 @@ public class PrestataireDAO {
 	            preparedStatement.setString(3, prestataire.getTelephone());	            
 	            preparedStatement.setString(4, prestataire.getActivite());
 	            preparedStatement.executeUpdate();
+	            majID(prestataire);
+				System.out.println("Le prestataire: " + prestataire.getNom()
+						+ " a bien été ajouté");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -37,6 +40,8 @@ public class PrestataireDAO {
 	            PreparedStatement preparedStatement = connection.prepareStatement("delete from PRESTATAIRE where IDPRESTATAIRE=?");
 	            preparedStatement.setInt(1, prestataireId);
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("Le prestataire: " + prestataireId + " a bien été supprimé");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -50,7 +55,11 @@ public class PrestataireDAO {
 	            preparedStatement.setString(2, prestataire.getAdresse());
 	            preparedStatement.setString(3, prestataire.getTelephone());	            
 	            preparedStatement.setString(4, prestataire.getActivite());
+	            preparedStatement.setInt(5, prestataire.getIdPrestataire());
 	            preparedStatement.executeUpdate();
+	            this.connection.commit();
+				System.out.println("Le prestataire: " + prestataire.getIdPrestataire()
+						+ " a bien été modifié");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -58,7 +67,7 @@ public class PrestataireDAO {
 
 	    public void majID(Prestataire prestataire){
 	        try {
-	            PreparedStatement preparedStatement = connection.prepareStatement("select * from PRESTATAIRE where NOM=?");
+	            PreparedStatement preparedStatement = connection.prepareStatement("select * from PRESTATAIRE where dbms_lob.compare(NOM, ?)= 0");
 	            preparedStatement.setString(1, prestataire.getNom());
 	            ResultSet rs = preparedStatement.executeQuery();
 	            if (rs.next()) {	
@@ -100,7 +109,8 @@ public class PrestataireDAO {
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement("select * from PRESTATAIRE where IDPRESTATAIRE="+prestataireId);
 	            ResultSet rs = preparedStatement.executeQuery();
-	            if (rs.next()) {	            	
+	            if (rs.next()) {
+	            	prestataire.setIdPrestataire(rs.getInt("IDPRESTATAIRE"));
 	            	prestataire.setNom(rs.getString("NOM"));
 	            	prestataire.setAdresse(rs.getString("ADRESSE"));
 	            	prestataire.setTelephone(rs.getString("TELEPHONE"));

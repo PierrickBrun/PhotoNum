@@ -24,6 +24,14 @@ public class Album {
 	public Album() {
 	}
 	
+	public Album(Client client, String talbum, String titre) {
+		this.client = client;
+		affecterType(talbum);
+		this.titre = titre;
+		this.preface = "";
+		this.postface = "";
+	}
+	
 	public Album(Client client, String talbum, String titre, int nbpages) {
 		this.client = client;
 		affecterType(talbum);
@@ -48,18 +56,23 @@ public class Album {
 		{
 		  case tAgenda52s:
 		    this.tAlbum = Talbum.Agenda52s;
+		    this.nbPage = 52;
 		    break;
 		  case tAgenda365j:
 			  this.tAlbum = Talbum.Agenda365j;
+			  this.nbPage = 365;
 		    break;
 		  case tCalendrierBureau:
 			  this.tAlbum = Talbum.CalendrierBureau;
+			  this.nbPage=20;
 		    break;
 		  case tCalendrierMural:
 			  this.tAlbum = Talbum.CalendrierMural;
+			  this.nbPage=12;
 		    break;
 		  case tLivre:
 			    this.tAlbum = Talbum.Livre;
+			    this.nbPage=32;
 			    break;
 		  default:
 		    this.tAlbum = Talbum.Album;
