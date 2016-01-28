@@ -126,7 +126,7 @@ public class Utilisateur {
 				System.out.println("Mail: "+currentConnectedUser.getMail()+" Adresse : "+currentConnectedUser.getAdresse());
 				break;
 			case 2:
-				getAllPromotion()
+				getAllPromotion();
 				
 				System.out.println("Nom: "+currentConnectedUser.getNom()+" Prénom: "+currentConnectedUser.getPrenom());
 				System.out.println("Mail: "+currentConnectedUser.getMail()+" Adresse : "+currentConnectedUser.getAdresse());
@@ -138,12 +138,12 @@ public class Utilisateur {
 			}
 		}
 		
-		public List<String> getAllPromotion() {
+		public static List<String> getAllPromotion() {
 			List<String> promotion = new ArrayList<String>();
 			try {
 				Statement statement = db.createStatement();
 				ResultSet rs = statement.executeQuery("select montant from Promotion join Commande on Promotion.idcommande=Commande.idcommande join Client on Commande.idclient=Client.idclient where idclient=?");
-				String promo;
+				String promo = null;
 				while (rs.next()) {
 					Client user = new Client();
 					promo+=rs.getInt("MONTANT");
@@ -193,7 +193,7 @@ public class Utilisateur {
 		
 		private static void utilisateursddMenu() {
 			PrintableMenu menu = new PrintableMenu("Profile Utilisateur");
-			//ClientDAO commandeDAO = new ClientDAO(db);client
+			ClientDAO commandeDAO = new ClientDAO(db);
 			List<Client> clientList = commandeDAO.getAllUsers();
 			for (Client client : clientList) {
 				menu.addItem(client.getNom()+" "+client.getPrenom()+" ("+client.getIdClient()+")");
