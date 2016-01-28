@@ -82,5 +82,12 @@ public class Commande {
 		return this.dateCommande;
 	}
 
+	@Override
+	public String toString() {
+		return "Commande [idCommande=" + idCommande + ", dateCommande=" + dateCommande + ", promotion=" + promotion
+				+ ", prixTotal=" + prixTotal + ", statut=" + statut + ", articles=" + articles + ", client=" + client
+				+ "]";
+	}
+
 
 }

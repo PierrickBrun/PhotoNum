@@ -117,4 +117,12 @@ public class Album {
 		this.nbPage = nbPage;
 	}
 
+	@Override
+	public String toString() {
+		return "Album [client=" + client + ", idAlbum=" + idAlbum + ", tAlbum=" + tAlbum + ", titre=" + titre
+				+ ", preface=" + preface + ", postface=" + postface + ", nbPage=" + nbPage + "]";
+	}
+	
+	
+
 }
