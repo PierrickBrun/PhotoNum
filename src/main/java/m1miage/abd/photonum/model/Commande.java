@@ -13,11 +13,12 @@ public class Commande {
 	private ArrayList<Article> articles;
 	private Client client;
 
-	public Commande() {
+	public Commande(Client client) {
 		this.dateCommande = new Date();
 		this.prixTotal = 0;
-		this.statut = "En cours";
+		this.statut = "en cours";
 		this.articles = new ArrayList<Article>();
+		this.client=client;
 	}
 
 	public int getIdCommande() {
