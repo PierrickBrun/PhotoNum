@@ -14,11 +14,12 @@ public class Article {
 	
 	}
 	
-	public Article(Commande commande, Album album, int quantite) {
+	public Article(Commande commande, Album album, int quantite, Format format) {
 		this.album = album;
 		this.prix = 0;
 		this.commande = commande;
 		this.quantite = quantite;
+		this.format=format;
 	}
 
 	public Commande getCommande() {

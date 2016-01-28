@@ -11,7 +11,7 @@ public class Format {
 
 	public Format(){};
 
-	public Format(String libelle, String resolutionMinimale, float vitesseImpression, int stockPapier, String type) {
+	public Format(String libelle, String resolutionMinimale, float vitesseImpression, int stockPapier) {
 		this.libelle = libelle;
 		this.resolutionMinimale = resolutionMinimale;
 		this.vitesseImpression = vitesseImpression;

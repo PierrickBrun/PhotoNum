@@ -12,7 +12,7 @@ public class Livraison {
 
 	public Livraison(){}
 	
-	public Livraison(Commande commande, Date date) {
+	public Livraison(Commande commande) {
 		this.commande = commande;
 		this.date = new Date();
 		this.status = "En cours";
